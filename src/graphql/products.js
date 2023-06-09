@@ -6,7 +6,11 @@ export const Product = gql`
       _id
       name
       description
-      categoryId
+      category {
+        _id
+        key
+        name
+      }
       price
       stock
     }

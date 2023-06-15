@@ -9,7 +9,6 @@ export const HomeContainer = () => {
 
   return (
     <Grid gap={2} justifyContent='center' >
-      home page
       {!error
         ? !loading
           ? <Grid gap={4} templateColumns='repeat(5, 1fr)'>

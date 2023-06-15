@@ -7,14 +7,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 import { usePathname } from "next/navigation"
 
 export const Providers = ({ children }) => {
-  const path = usePathname()
-  const render = () => {
-    const element = ''
-    if (path) {
-      
-    }
-    return
-  }
+
   return (
     <CacheProvider>
       <ChakraProvider>

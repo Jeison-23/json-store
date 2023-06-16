@@ -1,10 +1,9 @@
 
-
+import { useRouter } from 'next/navigation'
 import { Box, Button, Grid, Text } from '@chakra-ui/react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 export const ComponentPageHeader = (props) => {
+  const router = useRouter()
   const {
     actions = [],
     title = 'Title',
@@ -32,14 +31,15 @@ export const ComponentPageHeader = (props) => {
           ? actions.map((action, key) => {
             return (
               <Box key={key} >
-               
                   <Button
                     variant='outline'
-                    onClick={() => action?.handleAction ? action.handleAction() : undefined}
+                    onClick={() => {
+                      action?.handleAction ? action.handleAction() : undefined
+                      action?.url ? router.push(url) : undefined
+                    }}
                   >
                     {action?.label}
                   </Button>
-                
               </Box>
             )
           })

@@ -1,8 +1,9 @@
 'use client'
-import { Grid } from '@chakra-ui/react'
+import { Grid, useDisclosure } from '@chakra-ui/react'
 import { ComponentPageHeader } from '@/common/ComponentPageHeader'
 import { useCategoryContainer } from '@/hooks/useCategoryContainer'
 import { ComponentTable } from '@/common/ComponentTable'
+import { CategoryList } from '@/components/CategoryList'
 
 export const CategoryContainer = () => {
   const {
@@ -11,27 +12,25 @@ export const CategoryContainer = () => {
     loading,
     refresh
   } = useCategoryContainer()
-  console.log('data',data);
 
-  const header = [
-    { field: 'name', label: 'name'},
-    { field: 'key', label: 'key'},
-    { field: '_id', label: 'id'}
-  ]
+  const modalForm = useDisclosure()
 
   const action = [
     {
       label: 'Refrescar',
       handleAction: () => refresh(),
+    },
+    {
+      label: 'nueva',
+      handleAction: () => modalForm.onOpen(),
     }
   ]
+
   return (
     <Grid gap={2} justifyContent='center'>
       <Grid w='100vh'>
-      <ComponentPageHeader title='Categories' actions={action}  />
-      {
-        data?.category && <ComponentTable tableHead={header} list={data?.category} loading={loading} />
-      }
+        <ComponentPageHeader title='Categorias' actions={action} />
+        <CategoryList data={data?.category} loading={loading} modalForm={modalForm} />
       </Grid>
     </Grid>
   )

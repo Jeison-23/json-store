@@ -10,7 +10,7 @@ export const CategoryContainer = () => {
     data,
     error,
     loading,
-    refresh
+    refetch
   } = useCategoryContainer()
 
   const modalForm = useDisclosure()
@@ -22,7 +22,7 @@ export const CategoryContainer = () => {
     },
     {
       label: 'Refrescar',
-      handleAction: () => refresh(),
+      handleAction: () => refetch({}),
     }
   ]
 

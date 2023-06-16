@@ -9,3 +9,9 @@ export const category = gql`
     }
   }
 `
+
+export const CategorySave = gql`
+  mutation CategorySave($input: categoryInput) {
+    categorySave(input: $input)
+  }
+`

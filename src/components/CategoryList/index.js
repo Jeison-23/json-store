@@ -1,8 +1,9 @@
+import React from 'react'
+import { Grid } from '@chakra-ui/react'
+import { AiFillEdit } from 'react-icons/ai'
+import { CategoryForm } from '../CategoryForm'
 import { ComponentModal } from '@/common/ComponentModal'
 import { ComponentTable } from '@/common/ComponentTable'
-import { Grid } from '@chakra-ui/react'
-import { AiFillEdit } from 'react-icons/ai';
-import React from 'react'
 
 export const CategoryList = ({ data, loading, modalForm }) => {
   const header = [
@@ -30,6 +31,7 @@ export const CategoryList = ({ data, loading, modalForm }) => {
       <ComponentModal
         isOpen={modalForm.isOpen}
         onClose={modalForm.onClose}
+        body={<CategoryForm modalForm={modalForm} />}
       />
     </Grid>
   )

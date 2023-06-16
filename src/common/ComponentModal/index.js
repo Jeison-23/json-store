@@ -1,4 +1,3 @@
-
 import {
   Grid,
   Modal,
@@ -14,6 +13,7 @@ export const ComponentModal = (props) => {
   const {
     title = 'Modal Title',
     body = '',
+    size = 'xl',
     isOpen = false,
     onClose = ()=> {},
     footerButtons = [],
@@ -22,7 +22,7 @@ export const ComponentModal = (props) => {
 
   return (
     <Grid>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal size={size} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>

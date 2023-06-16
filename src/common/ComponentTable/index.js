@@ -10,16 +10,20 @@ import {
   IconButton,
   TableContainer,
   Text,
+  Tooltip,
+  Box,
 } from '@chakra-ui/react'
-import Link from 'next/navigation'
 import { TableLoader } from './loader'
+import { useRouter } from 'next/navigation'
 
 export const ComponentTable = (props) => {
+  const router = useRouter()
   const {
     list = [],
     actions = [],
     tableHead = [],
-    loading = false
+    loading = false,
+    dinamicValue = ''
   } = props
 
   return (
@@ -55,28 +59,29 @@ export const ComponentTable = (props) => {
                           </Td>
                         )
                       })}
+
                       {actions.length > 0 &&
                         <Td isNumeric>
                           <Flex justifyContent='flex-end' gap={2}>
-                            {
-                              actions.map((action, key) => {
-                                return (
-                                  <Link key={key} href={action?.isLink
-                                    ? `${action?.isLink?.route}/${row?.id}` : ''}
-                                  >
+                            {actions.map((action, key) => {
+                              return (
+                                <Tooltip key={key} label={action?.label}>
+                                  <Box>
                                     <IconButton
                                       variant='outline'
                                       _hover={{ cursor: 'pointer' }}
-                                      onClick={() => action?.handler ? action.handler(row) : {}}
-                                      icon={action?.icon ? action.icon : action?.label}
+                                      icon={action?.icon}
+                                      onClick={() => {
+                                        action?.handler ? action.handler(row) : {}
+                                        action?.route ? router.replace(`${action?.route}/${row[dinamicValue]}`) : undefined
+                                      }}
                                     />
-                                  </Link>
-                                )
-                              })
-                            }
+                                  </Box>
+                                </Tooltip>
+                              )
+                            })}
                           </Flex>
-                        </Td>
-                      }
+                        </Td>}
                     </Tr>
                   )
                 }

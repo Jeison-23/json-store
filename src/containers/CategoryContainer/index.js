@@ -17,12 +17,12 @@ export const CategoryContainer = () => {
 
   const action = [
     {
-      label: 'Refrescar',
-      handleAction: () => refresh(),
-    },
-    {
       label: 'nueva',
       handleAction: () => modalForm.onOpen(),
+    },
+    {
+      label: 'Refrescar',
+      handleAction: () => refresh(),
     }
   ]
 

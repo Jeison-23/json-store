@@ -5,6 +5,8 @@ import { Box, Grid, Input } from '@chakra-ui/react'
 export const ComponetInputFormik = (props) => {
   const {
     name = '',
+    size = 'md',
+    variant = 'outline',
     placeholder = '',
     isDisabled = false,
     onChangeInput = () => { },
@@ -20,6 +22,8 @@ export const ComponetInputFormik = (props) => {
           <Input
             {...field}
             type="text"
+            size={size}
+            variant={variant}
             isDisabled={isDisabled}
             placeholder={placeholder}
             onChange={(v) => {

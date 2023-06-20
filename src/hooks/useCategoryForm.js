@@ -1,9 +1,22 @@
-import { CategorySave } from '@/graphql/category';
+import { useEffect } from 'react'
 import { useMutation } from '@apollo/client'
+import { CategorySave } from '@/graphql/category'
 
-export const useCategoryForm = (modalForm) => {
+export const useCategoryForm = ({ closeModal, refetch }) => {
   const field_required = "Este campo es requerido"
   const [createCategory, { data, loading, error }] = useMutation(CategorySave)
+
+  useEffect(() => {
+    if (error) {
+      console.log('ha ocurrido un error', error);
+    }
+    if (data?.categorySave) {
+      refetch({})
+      closeModal()
+        console.log('creado con exito ', data);
+    }
+  
+  }, [data,error])
 
   const initialValues = {
     _id: null,
@@ -21,20 +34,14 @@ export const useCategoryForm = (modalForm) => {
   }
 
   const onSubmit = async (values) => {
-    console.log(values);
     try {
-      const response = await createCategory( {variables: { inputd: values }})
-      if (!loading) {
-        if (error) {
-          console.log('error', error);
-        } else {
-          modalForm.onClose()
-          console.log('creado con exito ', data);
-        }
-      }
-      console.log(response);
+      delete values.__typename
+      const response = await createCategory({ variables: { input: values } })
+      console.log('error', error)
+      console.log('response =--->',response)
+
     } catch (e) {
-      console.log('error catch',e);
+      //console.log('error catch', e);
     }
   }
 

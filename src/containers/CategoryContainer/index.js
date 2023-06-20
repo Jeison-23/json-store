@@ -30,7 +30,7 @@ export const CategoryContainer = () => {
     <Grid gap={2} justifyContent='center'>
       <Grid w='100vh'>
         <ComponentPageHeader title='Categorias' actions={action} />
-        <CategoryList data={data?.category} loading={loading} modalForm={modalForm} />
+        <CategoryList data={data?.category} loading={loading} modalForm={modalForm} refetch={refetch} />
       </Grid>
     </Grid>
   )

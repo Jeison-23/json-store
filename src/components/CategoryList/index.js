@@ -1,24 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid } from '@chakra-ui/react'
 import { AiFillEdit } from 'react-icons/ai'
 import { CategoryForm } from '../CategoryForm'
 import { ComponentModal } from '@/common/ComponentModal'
 import { ComponentTable } from '@/common/ComponentTable'
+import { useCategoryList } from '@/hooks/useCategoryList'
+import { ComponentAlert } from '@/common/ComponentAlert'
 
-export const CategoryList = ({ data, loading, modalForm }) => {
-  const header = [
-    { field: 'name', label: 'name' },
-    { field: 'key', label: 'key' },
-    { field: '_id', label: 'id' }
-  ]
-
-  const octions = [
-    {
-      icon: <AiFillEdit />,
-      label: 'Editar',
-      handler: ()=> modalForm.onOpen()
-    }
-  ]
+export const CategoryList = (props) => {
+  const { data, loading, modalForm, refetch } = props
+  const {
+    header,
+    actions,
+    closeModal,
+    alertDelete,
+    categorySelected,
+    setCategorySelected
+  } = useCategoryList(props)
 
   return (
     <Grid>
@@ -26,12 +24,27 @@ export const CategoryList = ({ data, loading, modalForm }) => {
         tableHead={header}
         list={data}
         loading={loading}
-        actions={octions}
+        actions={actions}
       />
       <ComponentModal
+        title='Categoria'
         isOpen={modalForm.isOpen}
-        onClose={modalForm.onClose}
-        body={<CategoryForm modalForm={modalForm} />}
+        onClose={closeModal}
+        body={
+          <CategoryForm
+            categorySelected={categorySelected}
+            closeModal={closeModal}
+            modalForm={modalForm}
+            refetch={refetch}
+          />
+        }
+      />
+      <ComponentAlert
+        title='Eliminar'
+        positionButton='end'
+        isOpen={alertDelete.isOpen}
+        onClose={alertDelete.onClose}
+        message={`Deseas eliminar el registro "${categorySelected?.name}" no podras recuperarlo luego`}
       />
     </Grid>
   )

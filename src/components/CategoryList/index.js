@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Grid } from '@chakra-ui/react'
-import { AiFillEdit } from 'react-icons/ai'
+import { LuAlertTriangle } from 'react-icons/lu'
 import { CategoryForm } from '../CategoryForm'
 import { ComponentModal } from '@/common/ComponentModal'
 import { ComponentTable } from '@/common/ComponentTable'
@@ -13,7 +13,9 @@ export const CategoryList = (props) => {
     header,
     actions,
     closeModal,
+    closeAlert,
     alertDelete,
+    actionsAlert,
     categorySelected,
     setCategorySelected
   } = useCategoryList(props)
@@ -28,7 +30,6 @@ export const CategoryList = (props) => {
       />
       <ComponentModal
         title='Categoria'
-        isOpen={modalForm.isOpen}
         onClose={closeModal}
         body={
           <CategoryForm
@@ -38,13 +39,16 @@ export const CategoryList = (props) => {
             refetch={refetch}
           />
         }
+        isOpen={modalForm.isOpen}
       />
       <ComponentAlert
-        title='Eliminar'
-        positionButton='end'
+        alertCentered
+        title='Eliminar Registro'
+        icon={LuAlertTriangle}
         isOpen={alertDelete.isOpen}
-        onClose={alertDelete.onClose}
-        message={`Deseas eliminar el registro "${categorySelected?.name}" no podras recuperarlo luego`}
+        onClose={closeAlert}
+        actionsButton={actionsAlert}
+        message={`¿Deseas eliminar el registro ${categorySelected?.name}?`}
       />
     </Grid>
   )

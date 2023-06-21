@@ -13,7 +13,7 @@ export const useCategoryForm = ({ closeModal, refetch }) => {
     if (data?.categorySave) {
       refetch({})
       closeModal()
-        console.log('creado con exito ', data);
+      console.log('creado con exito ', data);
     }
   
   }, [data,error])

@@ -8,39 +8,81 @@ import {
   ModalBody,
   ModalHeader,
   ModalContent,
+  ModalCloseButton,
+  ModalOverlay,
+  ModalFooter,
+  Divider,
 } from '@chakra-ui/react'
-import { FiAlertCircle } from 'react-icons/fi';
+import { FiAlertCircle } from 'react-icons/fi'
 
 export const ComponentAlert = (props) => {
   const {
-    size = 'sm',
     icon,
+    size = 'sm',
+    message = '',
+    iconColor = '',
     isOpen = false,
+    actionsButton = [],
+    closeButton = true,
     onClose = () => { },
+    alertCentered = false,
     title = 'Title Alert',
     positionButton = 'center',
-    message = 'Body Message Alert',
+    clickCloseOnOffSide = false,
   } = props
 
   return (
-    <Modal size='sm' isOpen={isOpen} onClose={onClose}>
+    <Modal
+      size={size}
+      isOpen={isOpen}
+      onClose={onClose}
+      isCentered={alertCentered}
+      closeOnOverlayClick={clickCloseOnOffSide}
+    >
+      <ModalOverlay />
       <ModalContent>
         <ModalHeader />
-
+        {closeButton && <ModalCloseButton />}
         <ModalBody>
-          <Grid justifyItems='center' >
-            <Icon as={icon || FiAlertCircle} boxSize={10} />
-            <Text as='b' fontSize='xl' > {title} </Text>
-            <Text>{message}</Text>
+          <Grid justifyItems='center' gap={4}>
+            <Icon
+              as={icon || FiAlertCircle}
+              color={iconColor}
+              boxSize={10}
+            />
+            <Grid justifyItems='center' gap={2} >
+              <Text as='b' fontSize='xl' > {title} </Text>
+              <Text maxW='280px'>{message}</Text>
+            </Grid>
           </Grid>
         </ModalBody>
 
-        <Grid gap={4} p={2} justifyContent={positionButton} templateColumns='repeat(2, auto)'>
-            <Button size='sm' variant='outline' colorScheme='blue' onClick={onClose}>
-              action
-            </Button>
-            <Button colorScheme='red' size='sm' variant='outline'>Secondary</Button>
-        </Grid>
+        <Divider orientation='horizontal' />
+
+        <ModalFooter justifyContent={positionButton} >
+          {actionsButton.length
+            ? <Grid gap={4} templateColumns={`repeat(3,auto)`}>
+              {
+                actionsButton.map((button, i) => {
+                  return (
+                    <Button
+                      key={i}
+                      size={button?.size}
+                      color={button?.color}
+                      variant={button?.variant}
+                      colorScheme={button?.colorScheme}
+                      isLoading={button?.loading}
+                      isDisabled={button?.disabled}
+                      onClick={button?.action}
+                    >
+                      {button?.label}
+                    </Button>
+                  )
+                })
+              }
+            </Grid>
+            : undefined}
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

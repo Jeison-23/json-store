@@ -15,3 +15,9 @@ export const CategorySave = gql`
     categorySave(input: $input)
   }
 `
+
+export const CategoryDelete = gql`
+  mutation CategoryDelete($id: String) {
+    categoryDelete(_id: $id)
+  }
+`

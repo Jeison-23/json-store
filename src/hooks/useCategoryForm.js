@@ -6,18 +6,6 @@ export const useCategoryForm = ({ closeModal, refetch }) => {
   const field_required = "Este campo es requerido"
   const [createCategory, { data, loading, error }] = useMutation(CategorySave)
 
-  useEffect(() => {
-    if (error) {
-      console.log('ha ocurrido un error', error);
-    }
-    if (data?.categorySave) {
-      refetch({})
-      closeModal()
-      console.log('creado con exito ', data);
-    }
-  
-  }, [data,error])
-
   const initialValues = {
     _id: null,
     key: '',
@@ -36,14 +24,22 @@ export const useCategoryForm = ({ closeModal, refetch }) => {
   const onSubmit = async (values) => {
     try {
       delete values.__typename
-      const response = await createCategory({ variables: { input: values } })
-      console.log('error', error)
-      console.log('response =--->',response)
+      await createCategory({ variables: { input: values } })
 
     } catch (e) {
-      //console.log('error catch', e);
+      console.log('error catch submit form', e);
     }
   }
+
+  useEffect(() => {
+    if (error) {
+      console.log('ha ocurrido un error', error)
+    } else if (data?.categorySave) {
+      refetch({})
+      closeModal()
+    }
+
+  }, [data, error])
 
   return {
     initialValues,

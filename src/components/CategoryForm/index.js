@@ -21,8 +21,8 @@ export const CategoryForm = (props) => {
     >
       {({ setFieldValue }) => (
         <Form>
-          <Grid gap={2} p={2}>
-            <Grid gap={2} templateColumns='1fr 1fr' >
+          <Grid gap={4} p={2}>
+            <Grid gap={4} templateColumns='1fr 1fr' >
               <ComponetInputFormik
                 name="name"
                 placeholder="Nombre"
@@ -32,6 +32,7 @@ export const CategoryForm = (props) => {
                   }
                 }}
               />
+
               <ComponetInputFormik
                 name="key"
                 placeholder="key"

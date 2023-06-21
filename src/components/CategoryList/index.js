@@ -29,7 +29,7 @@ export const CategoryList = (props) => {
         actions={actions}
       />
       <ComponentModal
-        title='Categoria'
+        title={`${!categorySelected._id ? 'Crear' : 'Editar' } categoria`}
         onClose={closeModal}
         body={
           <CategoryForm

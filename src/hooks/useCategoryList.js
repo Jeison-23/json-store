@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import { useDisclosure } from '@chakra-ui/react'
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import React, { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
+import { useDisclosure } from '@chakra-ui/react'
+import { CategoryDelete } from '@/graphql/category'
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 
-export const useCategoryList = ({modalForm}) => {
+export const useCategoryList = ({modalForm, refetch}) => {
   const alertDelete = useDisclosure()
   const [categorySelected, setCategorySelected] = useState({})
-
-  const [loadingg, setLoadingg] = useState(false)
-  //const [createCategory, { data, loading, error }] = useMutation(CategoryDelete)
+  const [deleteCategory, { data, loading, error }] = useMutation(CategoryDelete)
 
   const header = [
     { field: 'name', label: 'name' },
@@ -55,12 +54,22 @@ export const useCategoryList = ({modalForm}) => {
     },
     {
       size: 'sm',
-      loading: loadingg,
+      loading: loading,
       label: 'Eliminar',
       colorScheme: 'red',
-      variant: 'outline'
+      variant: 'outline',
+      action: () => deleteCategory({ variables: { id: categorySelected?._id } })
     }
   ]
+
+  useEffect(() => {
+    if (error) {
+      console.log('ha ocurrido un error', error);
+    } else if (data?.categoryDelete) {
+      refetch({})
+      closeAlert({})
+    }
+  }, [data, error])
 
   return {
     header,

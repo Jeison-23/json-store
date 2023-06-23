@@ -5,7 +5,7 @@ export const ThemeSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Button onClick={toggleColorMode}>
+    <Button variant='outline' onClick={toggleColorMode}>
       {colorMode === 'light' ? 'Ligth' : 'Dark'}
     </Button>
   )

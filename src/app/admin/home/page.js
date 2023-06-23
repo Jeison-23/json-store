@@ -1,8 +1,8 @@
-import { HomeContainer } from '@/containers/HomeContainer'
+import { AdminHomeContainer } from '@/containers/AdminHomeContainer'
 
 const Home = () => {
   return (
-    <HomeContainer isAdmin />
+    <AdminHomeContainer isAdmin />
   )
 }
 

@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { Box, Grid } from '@chakra-ui/react'
-import { ComponentPageHeader } from '@/common/ComponentPageHeader'
-import { useRoleContainer } from '@/hooks/useRoleContainer'
 import { RoleList } from '@/components/RoleList.js'
+import { useRoleContainer } from '@/hooks/useRoleContainer'
+import { ComponentPageHeader } from '@/common/ComponentPageHeader'
 
 export const RoleContainer = () => {
   const {
@@ -24,8 +24,6 @@ export const RoleContainer = () => {
       handleAction: () => { },
     }
   ]
-
-  console.log(data);
 
   return (
     <Box m={4}>

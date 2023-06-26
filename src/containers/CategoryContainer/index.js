@@ -1,8 +1,7 @@
 'use client'
-import { Grid, useDisclosure } from '@chakra-ui/react'
+import { Box, Grid, useDisclosure } from '@chakra-ui/react'
 import { ComponentPageHeader } from '@/common/ComponentPageHeader'
 import { useCategoryContainer } from '@/hooks/useCategoryContainer'
-import { ComponentTable } from '@/common/ComponentTable'
 import { CategoryList } from '@/components/CategoryList'
 
 export const CategoryContainer = () => {
@@ -27,11 +26,11 @@ export const CategoryContainer = () => {
   ]
 
   return (
-    <Grid gap={2} justifyContent='center'>
-      <Grid w='100vh'>
+    <Box m={4}>
+      <Grid gap={2} >
         <ComponentPageHeader title='Categorias' actions={action} />
         <CategoryList data={data?.category} loading={loading} modalForm={modalForm} refetch={refetch} />
       </Grid>
-    </Grid>
+    </Box>
   )
 }

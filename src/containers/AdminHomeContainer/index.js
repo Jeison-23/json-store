@@ -7,10 +7,10 @@ export const AdminHomeContainer = () => {
   return (
     <Grid ml={2} my={1}>
       <Grid p={4} gap={4} templateColumns='1fr 1fr 1fr 1fr'  >
-        <Box  h='100px' bg='red' >
+        <Box  h='400px' bg='red' >
           asdasd
         </Box>
-        <Box  h='100px' bg='red' >
+        <Box  h='200px' bg='red' >
           asdasd
         </Box>
 

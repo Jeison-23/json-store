@@ -23,7 +23,6 @@ export const NavbarAdminLayout = ({ children }) => {
               cursor='pointer'
               alignItems='center'
               borderRadius='10px'
-              _hover={{ bg: 'blue.800' }}
             >
               <Icon as={AiOutlineAppstoreAdd} boxSize={7} />
               <Text
@@ -64,11 +63,21 @@ export const NavbarAdminLayout = ({ children }) => {
             </Text>
           </Link>
 
+          <Link href='/admin/roles'>
+            <Text
+              cursor='pointer'
+            >
+              Roles
+            </Text>
+          </Link>
+
+          <Link href='/admin/users'>
           <Text
             cursor='pointer'
           >
             Usuarios
           </Text>
+          </Link>
 
         </Flex>
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'formik'
-import { Grid, Input, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, Input, Text } from '@chakra-ui/react'
 
 export const ComponetInputFormik = (props) => {
   const {
@@ -8,6 +8,7 @@ export const ComponetInputFormik = (props) => {
     label = '',
     size = 'md',
     labelSize = '',
+    required= false,
     variant = 'outline',
     placeholder = '',
     isDisabled = false,
@@ -21,7 +22,10 @@ export const ComponetInputFormik = (props) => {
         form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
         meta }) => (
         <Grid gap={1}>
-          <Text fontSize={labelSize}>{label}</Text>
+          <Flex gap={1}>
+            <Text fontSize={labelSize}>{label}</Text>
+            <Text fontSize={labelSize} color='tomato'>{`${required ? '*' : ''}`}</Text>
+          </Flex>
           <Input
             {...field}
             type="text"

@@ -26,11 +26,9 @@ export const CategoryContainer = () => {
   ]
 
   return (
-    <Box m={4}>
-      <Grid gap={2} >
-        <ComponentPageHeader title='Categorias' actions={action} />
-        <CategoryList data={data?.category} loading={loading} modalForm={modalForm} refetch={refetch} />
-      </Grid>
-    </Box>
+    <Grid m={4} gap={2} >
+      <ComponentPageHeader title='Categorias' actions={action} />
+      <CategoryList data={data?.category} loading={loading} modalForm={modalForm} refetch={refetch} />
+    </Grid>
   )
 }

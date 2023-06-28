@@ -91,7 +91,9 @@ export const NavbarAdminLayout = ({ children }) => {
         </Flex>
       </Grid>
 
-      <Box>
+      <Box
+        overflowX='hidden' overflowY='auto' h='calc(100vh - 93px)'
+      >
         {children}
       </Box>
     </Box>

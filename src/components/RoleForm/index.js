@@ -6,7 +6,7 @@ import { ComponetInputFormik } from '@/common/ComponetInputFormik'
 
 export const RoleForm = (props) => {
   const { roleSelected } = props
-  const { initialValues, validate, onSubmit } = useRoleForm(props)
+  const { initialValues, validate, loading, onSubmit } = useRoleForm(props)
 
   return (
     <Formik
@@ -36,6 +36,7 @@ export const RoleForm = (props) => {
               />
             </Grid>
             <Button
+            isLoading={loading}
               type='submit'
               variant='outline'
               colorScheme='green'

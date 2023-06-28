@@ -6,6 +6,7 @@ export const ComponetInputFormik = (props) => {
   const {
     name = '',
     label = '',
+    type="text",
     size = 'md',
     labelSize = '',
     required= false,
@@ -28,7 +29,7 @@ export const ComponetInputFormik = (props) => {
           </Flex>
           <Input
             {...field}
-            type="text"
+            type={type}
             size={size}
             variant={variant}
             isDisabled={isDisabled}

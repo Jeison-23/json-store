@@ -6,8 +6,8 @@ export const ComponetInputFormik = (props) => {
   const {
     name = '',
     label = '',
-    type="text",
     size = 'md',
+    type = "text",
     labelSize = '',
     required= false,
     variant = 'outline',

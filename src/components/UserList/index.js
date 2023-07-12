@@ -21,12 +21,11 @@ export const UserList = ({modalUserForm}) => {
       <CardUser />
 
       <ComponentModal
+        size='4xl'
         title='Crear usuario'
         isOpen={modalUserForm.isOpen}
         onClose={modalUserForm.onClose}
-        body={
-          <UserForm />
-        }
+        body={<UserForm />}
       />
     </Grid>
   )

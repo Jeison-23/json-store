@@ -3,6 +3,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/hooks": ["./src/hooks"],
+      "@/constants": ["./src/constants"],
       "@/helpers": ["./src/helpers"],
       "@/containers": ["./src/containers"],
       "@/components": ["./src/components"],

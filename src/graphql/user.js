@@ -1,19 +1,20 @@
 import { gql } from "@apollo/client";
 
 export const User = gql`
-  query User {
-    user {
+  query User($filter: userFilter) {
+    user(filter: $filter) {
       _id
-      role {
-        _id
-        key
-        rol
-      }
+      id
+      typeId
       firstName
       lastName
-      phone
+      image
       email
-      password
+      phone
+      role {
+        _id
+        rol
+      }
     }
   }
 `;

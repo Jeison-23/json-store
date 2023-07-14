@@ -7,12 +7,11 @@ import {
   Text
 } from '@chakra-ui/react'
 
-export const CardUser = () => {
+export const CardUser = ({user}) => {
   return (
     <Flex
       p={1}
       gap={2}
-      //color='#000000'
       borderRadius='lg'
       borderWidth='1px'
     >
@@ -21,27 +20,43 @@ export const CardUser = () => {
           <Image
             justifySelf='center'
             w='200px' h='130px'
-            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1pCNaVg5-i4AFXFYM7HRG8YYFT-GURMkWSzuJrYR0y7eGGLcXmJ7FoyHqkorhD4vB3XQ&usqp=CAU'
+            src={user?.image}
           />
         </Grid>
-        <Text maxWidth='130px' fontSize='sm' noOfLines={1}>Jhon China</Text>
-        <Text fontSize='sm'></Text>
+        <Text
+          as='b'
+          maxWidth='200px'
+          textTransform='capitalize'
+          fontSize='sm'
+          noOfLines={1}
+        >
+          {`${user?.firstName} - ${user?.lastName}`}
+        </Text>
       </Box>
 
       <Box>
         <Flex gap={1}>
           <Text as='b' fontSize='4xl'  >JSON STORE</Text>
-          <Grid alignSelf='center' maxW='50px'>
-            <Text fontSize='2xs'>
-              ROL ADMIN
+          <Grid alignSelf='center' maxW='40px'>
+            <Text textTransform='uppercase' fontSize='2xs'>
+              {`ROL ${user?.role?.rol}`}
             </Text>
           </Grid>
         </Flex>
 
         <Box>
-          <Text fontSize='sm'>Cc 1234560943</Text>
-          <Text fontSize='sm'>phone 123-345-098-43</Text>
-          <Text fontSize='sm'>email emailrealnofake@gmail.com</Text>
+          <Flex>
+          <Text textTransform='capitalize' fontSize='sm'>{`${user?.typeId}`}</Text>
+          <Text fontSize='sm'>{`${user?.id}`}</Text>
+          </Flex>
+          <Flex gap={1}>
+            <Text fontSize='md' as='b'>Telefono:</Text>
+            <Text fontSize='sm'> {user?.phone || '- - - - -'} </Text>
+          </Flex>
+          <Flex gap={1}>
+            <Text fontSize='sm' as='b'>Correo:</Text>
+            <Text fontSize='sm' >{`Correo: ${user?.email}`}</Text>
+          </Flex>
         </Box>
       </Box>
     </Flex>

@@ -12,13 +12,14 @@ export const PreviewImage = ({ url }) => {
       bgImage={url}
     />*/
     <Box
-      borderWidth='1px'
+      //borderWidth='1px'
       w='222px'
       h='152px'
     >
       <Image
-        w='220px'
-        h='150px'
+      //margin='0 auto'
+        w='auto'
+        h='100%'
         src={url}
       />
     </Box>

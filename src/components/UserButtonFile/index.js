@@ -4,7 +4,7 @@ import { Box, Button, } from '@chakra-ui/react'
 import { PreviewImage } from '../PreviewImage'
 
 export const UserButtonFile = (props) => {
-  const { setFieldValue } = useFormikContext()
+  const { values, setFieldValue } = useFormikContext()
   const {
     name,
     size,
@@ -18,7 +18,19 @@ export const UserButtonFile = (props) => {
     multiple = false,
   } = props
 
+  const [urlImage, setUrlImage] = useState('')
   const [files, setFiles] = useState([])
+
+  useEffect(() => {
+    if (values[name]) {
+      if (typeof values[name] === 'string') {
+        setUrlImage(values[name])
+      }else{
+        setUrlImage('')
+      }
+    }
+  }, [values])
+  
 
   useEffect(() => {
     if (files.length) {
@@ -70,7 +82,7 @@ export const UserButtonFile = (props) => {
         {
           files.length
             ? files.map((file, i) => <PreviewImage key={i} url={getUrlFile(file)}/>)
-            : <PreviewImage url='/no_image.jpeg' /> /* {`url('/no_image.jpeg')`} */ }
+            : <PreviewImage url={urlImage || '/no_image.jpeg'} /> /* {`url('/no_image.jpeg')`} */ }
       </Box>
     </Box>
   )

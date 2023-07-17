@@ -3,23 +3,27 @@ import {
   Box,
   Flex,
   Grid,
+  Icon,
   Image,
-  Text
+  Text,
+  Tooltip
 } from '@chakra-ui/react'
 
-export const CardUser = ({user}) => {
+export const CardUser = ({ user,  options = [] }) => {
+
   return (
-    <Flex
+    <Grid
       p={1}
       gap={2}
       borderRadius='lg'
       borderWidth='1px'
+      templateColumns={`repeat(${options.length ? 3 : 2}, auto)`}
     >
       <Box>
-        <Grid>
+        <Grid borderWidth='1px'>
           <Image
             justifySelf='center'
-            w='200px' h='130px'
+            w='198px' h='128px'
             src={user?.image}
           />
         </Grid>
@@ -59,6 +63,19 @@ export const CardUser = ({user}) => {
           </Flex>
         </Box>
       </Box>
-    </Flex>
+
+      <Box>
+        {options.length
+          ? options.map((option, i) => (
+            <Tooltip key={i} hasArrow label={option?.label} >
+              <Box>
+                <Icon cursor='pointer' as={option?.Icon} onClick={() => option?.action(user)} />
+              </Box>
+            </Tooltip>
+          ))
+          : undefined
+        }
+      </Box>
+    </Grid>
   )
 }

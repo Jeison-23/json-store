@@ -6,7 +6,10 @@ export const useUserContainer = () => {
   const [getUsers, { loading, error, data }] = useLazyQuery(User)
 
   const refreshUsers = (filter = {}) => {
-    getUsers({ variables: { filter: filter } })
+    getUsers({
+      variables: { filter: filter },
+      fetchPolicy: 'cache-and-network'
+    })
   }
 
   useEffect(() => {

@@ -17,10 +17,10 @@ export const RoleContainer = () => {
   const modalRoleForm = useDisclosure()
 
   const action = [
-    {
+    /*{
       label: 'nueva',
       handleAction: modalRoleForm.onOpen,
-    },
+    },*/
     {
       label: 'Refrescar',
       handleAction: () => refetch({}),

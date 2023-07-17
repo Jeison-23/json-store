@@ -27,14 +27,14 @@ export const useRoleList = (props) => {
         modalRoleForm.onOpen()
       }
     },
-    {
+    /*{
       icon: <AiFillDelete />,
       label: 'Eliminar',
       handler: (row) => {
         setRoleSelected(row)
         alertRolDelete.onOpen()
       }
-    }
+    }*/
   ]
 
   const closeRoleModal = () => {

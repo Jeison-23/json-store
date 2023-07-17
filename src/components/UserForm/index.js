@@ -3,19 +3,21 @@ import { Form, Formik } from 'formik'
 import { useUserForm } from '@/hooks/useUserForm'
 import { UserButtonFile } from '../UserButtonFile'
 import { ComponetInputFormik } from '@/common/ComponetInputFormik'
-import { Box, Button, Divider, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Button, Divider, Grid } from '@chakra-ui/react'
 import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 
-export const UserForm = ({modalUserForm}) => {
+export const UserForm = (props) => {
+  const { userSelected } = props
   const {
     file,
+    loading,
     setFile,
-    initialValues,
+    validate,
+    onSubmit,
     dataRole,
     loadingRole,
-    validate,
-    onSubmit
-  } = useUserForm({modalUserForm})
+    initialValues,
+  } = useUserForm(props)
 
   return (
     <Formik
@@ -28,7 +30,7 @@ export const UserForm = ({modalUserForm}) => {
           <Grid templateColumns='1fr auto 1fr' gap={2}>
             <Box>
               <Grid gap={4}>
-               <Grid gap={2}>
+                <Grid gap={2}>
                   <UserButtonFile
                     size='sm'
                     accept="image/*"
@@ -38,8 +40,9 @@ export const UserForm = ({modalUserForm}) => {
                   >
                     Seleccionar Imagen
                   </UserButtonFile>
-               </Grid>
-               <Grid gap={2}>
+                </Grid>
+
+                <Grid gap={2}>
                   <ComponentSelectFormik
                     label='Selecciona el rol'
                     data={dataRole?.role}
@@ -53,14 +56,15 @@ export const UserForm = ({modalUserForm}) => {
                     required
                     name='email'
                   />
-                <ComponetInputFormik label='password' required type='password' name='password' />
+                  {!userSelected?._id 
+                  && <ComponetInputFormik label='password' required type='password' name='password' />}
                 </Grid>
               </Grid>
             </Box>
 
             <Divider orientation='vertical' />
 
-            <Box>
+            <Grid>
               <Grid gap={2}>
                 <ComponetInputFormik label='Nombre' required name='firstName' />
                 <ComponetInputFormik label='Apellidos' required name='lastName' />
@@ -68,19 +72,19 @@ export const UserForm = ({modalUserForm}) => {
                 <ComponetInputFormik type='number' label='documento' required name='id' />
                 <ComponetInputFormik label='telefono' name='phone' />
               </Grid>
-            </Box>
 
-            <GridItem colSpan={3} >
               <Button
                 size='sm'
                 type='submit'
+                isLoading={loading}
                 variant='outline'
                 colorScheme='teal'
                 justifySelf='end'
               >
                 Aceptar
               </Button>
-            </GridItem>
+            </Grid>
+
           </Grid>
         </Form>
       )}

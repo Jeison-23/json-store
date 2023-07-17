@@ -4,28 +4,8 @@ import { HandleClickOutside } from '../HandleClickOutside'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import { useFormikContext } from 'formik'
 
-const array = [
-  {
-    label: 'item 1',
-    value: 1,
-  },
-  {
-    label: 'item 2',
-    value: 2,
-  },
-  {
-    label: 'item 3',
-    value: 3,
-  },
-  {
-    label: 'item 4',
-    value: 4,
-  }
-]
-
 export const ComponentSelectFormik = (props) => {
   const { values, setFieldValue } = useFormikContext()
-
   const bgInput = useColorModeValue('#EDF2F7','#2D3748') // #262B36 dark #EDF2F7 Ligth
   const bgList = useColorModeValue('#F7FAFC','#262B36')
 
@@ -86,7 +66,6 @@ export const ComponentSelectFormik = (props) => {
   
         <Grid
           px={4}
-          //bg={bgInput}
           h='40px'
           cursor='pointer'
           borderWidth='1px'

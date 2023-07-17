@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { UserSave } from "@/graphql/user"
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import { messages } from "@/constants/messages"
-import { Role } from "@/graphql/role"
+import { useGeneralFunction } from "./useGeneralFunction"
 
 export const useUserForm = (props) => {
   const {
@@ -12,12 +12,7 @@ export const useUserForm = (props) => {
     closeModal
   } = props
 
-  const {
-    loading: loadingRole,
-    error: errorRole,
-    data: dataRole,
-  } = useQuery(Role)
-
+  const { validateEmail } = useGeneralFunction()
   const [createUser, { data, loading, error }] = useMutation(UserSave)
   const [file, setFile] = useState([])
 
@@ -42,6 +37,8 @@ export const useUserForm = (props) => {
       if (!values.password) error.password = messages['FIELD_REQUIRED']
     }
     if (!values.email) error.email = messages['FIELD_REQUIRED']
+    else if (!validateEmail(values.email)) error.email = messages['EMAIL_INCORRECT']
+
     if (!userSelected?.img) {
       if (!values.image.length) error.image = messages['FIELD_REQUIRED']
     }
@@ -53,7 +50,6 @@ export const useUserForm = (props) => {
   } 
 
   const onSubmit = async (values) => {
-    console.log('values',values)
     try {
       delete values.__typename
       if(!values.password) delete values.password
@@ -82,8 +78,6 @@ export const useUserForm = (props) => {
     setFile,
     validate,
     onSubmit,
-    dataRole,
-    loadingRole,
     initialValues,
   }
 }

@@ -20,10 +20,11 @@ export const CardUser = ({ user,  options = [] }) => {
       templateColumns={`repeat(${options.length ? 3 : 2}, auto)`}
     >
       <Box>
-        <Grid borderWidth='1px'>
+        <Grid >
           <Image
+            borderRadius={'md'}
             justifySelf='center'
-            w='198px' h='128px'
+            w='200px' h='130px'
             src={user?.image}
           />
         </Grid>
@@ -50,12 +51,12 @@ export const CardUser = ({ user,  options = [] }) => {
 
         <Box>
           <Flex>
-          <Text textTransform='capitalize' fontSize='sm'>{`${user?.typeId}`}</Text>
-          <Text fontSize='sm'>{`${user?.id}`}</Text>
+          <Text textTransform='capitalize' fontSize='sm'>{`${user?.typeId}`}: </Text>
+          <Text fontSize='sm'>{` ${user?.id}`}</Text>
           </Flex>
           <Flex gap={1}>
             <Text fontSize='md' as='b'>Telefono:</Text>
-            <Text fontSize='sm'> {user?.phone || '- - - - -'} </Text>
+            <Text fontSize='sm'> {user?.phone || '_ _ _ _ _'} </Text>
           </Flex>
           <Flex gap={1}>
             <Text fontSize='sm' as='b'>Correo:</Text>
@@ -69,7 +70,7 @@ export const CardUser = ({ user,  options = [] }) => {
           ? options.map((option, i) => (
             <Tooltip key={i} hasArrow label={option?.label} >
               <Box>
-                <Icon cursor='pointer' as={option?.Icon} onClick={() => option?.action(user)} />
+                <Icon cursor='pointer' as={option?.icon} onClick={() => option?.action(user)} />
               </Box>
             </Tooltip>
           ))

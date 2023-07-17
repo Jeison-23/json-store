@@ -4,20 +4,28 @@ import { ComponentModal } from '@/common/ComponentModal'
 import { UserForm } from '../UserForm'
 import { CardUser } from '../CardUser'
 import { useUserList } from '@/hooks/useUserList'
+import { ComponentAlert } from '@/common/ComponentAlert'
+import { LuAlertTriangle } from 'react-icons/lu'
 
 export const UserList = (props) => {
   const {
     data,
     loading,
     refreshUsers,
-    modalUserForm
+    modalUserForm,
+    loadingRole,
+    errorRole,
+    dataRole,
   } = props
 
   const {
     actionCard,
     closeModal,
-    userSelected
-  } = useUserList({ modalUserForm })
+    userSelected,
+    closeUserAlert,
+    alertUserDelete,
+    actionsUserAlert,
+  } = useUserList({modalUserForm, refreshUsers})
 
   return (
     <Box>
@@ -44,8 +52,22 @@ export const UserList = (props) => {
             userSelected={userSelected}
             refreshUsers={refreshUsers}
             modalUserForm={modalUserForm}
+            loadingRole={loadingRole}
+            errorRole={errorRole}
+            dataRole={dataRole}
           />
         )}
+      />
+
+      <ComponentAlert
+        alertCentered
+        title='Eliminar Registro'
+        icon={LuAlertTriangle}
+        iconColor='#C53030'
+        isOpen={alertUserDelete.isOpen}
+        onClose={closeUserAlert}
+        actionsButton={actionsUserAlert}
+        message={`¿Deseas eliminar a ${userSelected?.firstName} ${userSelected?.lastName}?`}
       />
     </Box>
   )

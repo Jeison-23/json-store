@@ -11,7 +11,10 @@ export const UserContainer = () => {
     data,
     error,
     loading,
-    refreshUsers
+    refreshUsers,
+    loadingRole,
+    errorRole,
+    dataRole,
   } = useUserContainer()
 
   const modalUserForm = useDisclosure()
@@ -30,7 +33,15 @@ export const UserContainer = () => {
   return (
     <Grid m={4} gap={2}>
       <ComponentPageHeader actions={actions} title='Usuarios' />
-      <UserList data={data} loading={loading} refreshUsers={refreshUsers} modalUserForm={modalUserForm} />
+      <UserList
+        data={data}
+        loading={loading}
+        refreshUsers={refreshUsers}
+        modalUserForm={modalUserForm}
+        loadingRole={loadingRole}
+        errorRole={errorRole}
+        dataRole={dataRole}
+      />
     </Grid>
   )
 }

@@ -1,9 +1,15 @@
 import { useEffect } from 'react'
 import { User } from '@/graphql/user'
-import { useLazyQuery } from '@apollo/client'
+import { Role } from "@/graphql/role"
+import { useQuery,useLazyQuery } from '@apollo/client'
 
 export const useUserContainer = () => {
   const [getUsers, { loading, error, data }] = useLazyQuery(User)
+  const {
+    loading: loadingRole,
+    error: errorRole,
+    data: dataRole
+  } = useQuery(Role)
 
   const refreshUsers = (filter = {}) => {
     getUsers({
@@ -20,6 +26,9 @@ export const useUserContainer = () => {
     data,
     error,
     loading,
-    refreshUsers
+    refreshUsers,
+    loadingRole,
+    errorRole,
+    dataRole,
   }
 }

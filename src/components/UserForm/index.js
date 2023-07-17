@@ -3,19 +3,23 @@ import { Form, Formik } from 'formik'
 import { useUserForm } from '@/hooks/useUserForm'
 import { UserButtonFile } from '../UserButtonFile'
 import { ComponetInputFormik } from '@/common/ComponetInputFormik'
-import { Box, Button, Divider, Grid } from '@chakra-ui/react'
+import { Box, Button, Divider, Flex, Grid, GridItem } from '@chakra-ui/react'
 import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 
 export const UserForm = (props) => {
-  const { userSelected } = props
+  const {
+    userSelected,
+    loadingRole,
+    errorRole,
+    dataRole
+  } = props
+
   const {
     file,
     loading,
     setFile,
     validate,
     onSubmit,
-    dataRole,
-    loadingRole,
     initialValues,
   } = useUserForm(props)
 
@@ -72,18 +76,31 @@ export const UserForm = (props) => {
                 <ComponetInputFormik type='number' label='documento' required name='id' />
                 <ComponetInputFormik label='telefono' name='phone' />
               </Grid>
-
-              <Button
-                size='sm'
-                type='submit'
-                isLoading={loading}
-                variant='outline'
-                colorScheme='teal'
-                justifySelf='end'
-              >
-                Aceptar
-              </Button>
             </Grid>
+
+            <GridItem colSpan='3'>
+              <Flex gap={2} justifyContent='end'>
+              <Button
+                  size='sm'
+                  type='reset'
+                  isLoading={loading}
+                  variant='outline'
+                  colorScheme='pink'
+                >
+                  Cancelar
+                </Button>
+                
+                <Button
+                  size='sm'
+                  type='submit'
+                  isLoading={loading}
+                  variant='outline'
+                  colorScheme='teal'
+                >
+                  Aceptar
+                </Button>
+              </Flex>
+            </GridItem>
 
           </Grid>
         </Form>

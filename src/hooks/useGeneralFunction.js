@@ -21,6 +21,14 @@ export const useGeneralFunction = () => {
     })
   }
 
+  const createArray = (size = 0) => {
+    const array = []
+    for (let i = 0; i < size; i++) {
+      array.push(i)
+    }
+    return array
+  }
+
   const validateEmail = (chain) => {
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return pattern.test(chain);
@@ -28,6 +36,7 @@ export const useGeneralFunction = () => {
 
   return {
     alertToast,
-    validateEmail
+    createArray,
+    validateEmail,
   }
 }

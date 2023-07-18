@@ -40,13 +40,15 @@ export const NavbarAdminLayout = ({ children }) => {
           gap={2}
           alignItems='center'
         >
+          <Link href='/admin/posts'>
           <Text
             as='b'
-            cursor='default'
+            cursor='pointer'
             fontSize='2xl'
           >
-            Administracion
+            Administración
           </Text>
+          </Link>
 
           <Text
             cursor='pointer'

@@ -12,3 +12,9 @@ export const Post = gql`
     }
   }
 `
+
+export const PostSave = gql`
+  mutation PostSave($input: postInput) {
+    postSave(input: $input)
+  }
+`

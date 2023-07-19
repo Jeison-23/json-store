@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Formik } from 'formik'
 import { useUserForm } from '@/hooks/useUserForm'
-import { UserButtonFile } from '../UserButtonFile'
+import { ButtonImageFile } from '../ButtonImageFile'
 import { ComponetInputFormik } from '@/common/ComponetInputFormik'
 import { Box, Button, Divider, Flex, Grid, GridItem } from '@chakra-ui/react'
 import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
@@ -35,15 +35,13 @@ export const UserForm = (props) => {
             <Box>
               <Grid gap={4}>
                 <Grid gap={2}>
-                  <UserButtonFile
+                  <ButtonImageFile
                     size='sm'
                     accept="image/*"
-                    name='image'
-                    state={file}
-                    setState={setFile}
+                    name='image'               
                   >
                     Seleccionar Imagen
-                  </UserButtonFile>
+                  </ButtonImageFile>
                 </Grid>
 
                 <Grid gap={2}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Flex, Grid, Img, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, Img, Text } from '@chakra-ui/react'
 
 export const CardPost = (props) => {
   const {
@@ -11,8 +11,8 @@ export const CardPost = (props) => {
   } = props
 
   return (
-    <Grid
-      //bg={type === 'info' ? '#4299E1' : 'green'}
+    <Box>
+      <Grid
       borderRadius='md'
       borderWidth={1}
       minH='300px'
@@ -20,7 +20,7 @@ export const CardPost = (props) => {
       px={2}
       py={1}
     >
-      <Grid justifyItems='center'>
+      <Grid bg={type === 'info' ? 'blue.700' : type === 'warn' ? 'red.700' : type === 'prom' ? 'yellow.600' : 'gray.400'} justifyItems='center'>
         <Text
           as='b'
           fontSize='2xl'
@@ -31,7 +31,7 @@ export const CardPost = (props) => {
       </Grid>
 
       {images.length
-        ? <Grid gap={2} templateColumns={{ xl: `repeat(${images.length >= 2 ? 3 : 1} 1fr)`, sm: '1fr 1fr', xs: '1fr' }} >
+        ? <Grid gap={2} templateColumns={`repeat(${images.length >= 2 ? 3 : 1}, 1fr)`} >
           {
             images.map((image, i) => (
               <Img
@@ -56,5 +56,7 @@ export const CardPost = (props) => {
         }
       </Flex>
     </Grid>
+    </Box>
+
   )
 }

@@ -1,10 +1,12 @@
 import React from 'react'
 import { Grid } from '@chakra-ui/react'
 import { CardPost } from '../CardPost'
+import { ComponentModal } from '@/common/ComponentModal'
+import { PostForm } from '../PostForm'
 
-export const PostsList = ({data, loading}) => {
+export const PostsList = ({refresh, data, loading, modalPost}) => {
   return (
-    <Grid position='relative' gap={2} p={2}>
+    <Grid position='relative' gap={4} p={2}>
       {
         data?.length ?
         data.map((post,i) => (
@@ -19,7 +21,14 @@ export const PostsList = ({data, loading}) => {
         ))
         : undefined
       }
-      
+      <ComponentModal
+        title='Crear Post'
+        body={
+          <PostForm refresh={refresh} modalPost={modalPost} />
+        }
+        isOpen={modalPost.isOpen}
+        onClose={modalPost.onClose}
+      />
     </Grid>
   )
 }

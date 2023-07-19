@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useFormikContext } from 'formik'
-import { Box, Button, } from '@chakra-ui/react'
+import { Box, Button, Grid, } from '@chakra-ui/react'
 import { PreviewImage } from '../PreviewImage'
 
-export const UserButtonFile = (props) => {
+export const ButtonImageFile = (props) => {
   const { values, setFieldValue } = useFormikContext()
   const {
     name,
@@ -31,7 +31,6 @@ export const UserButtonFile = (props) => {
     }
   }, [values])
   
-
   useEffect(() => {
     if (files.length) {
       setFieldValue(name, files)
@@ -49,11 +48,20 @@ export const UserButtonFile = (props) => {
           arrayFiles.push(_file)
         }
       }
-      setFiles(arrayFiles)
+      if (multiple) {
+        setFiles((state) => state.concat(arrayFiles))
+      } else {
+        setFiles(arrayFiles)
+      }
     }
   }
 
-  const getUrlFile = (file) =>  URL.createObjectURL(file) //`url(${URL.createObjectURL(file)})`
+  const getUrlFile = (file) => URL.createObjectURL(file)
+
+  const removeFile = (fileName) => {
+    const modificado = files.filter(file => file.name !== fileName )
+    setFiles(modificado)
+  }
 
   return (
     <Box>
@@ -78,12 +86,19 @@ export const UserButtonFile = (props) => {
         onChange={(value) => handleChanged(value.target.files)}
       />
 
-      <Box my={2}>
+      <Grid gap={2} my={2} templateColumns={`repeat(${multiple ? 3 : 1}, 1fr)`}>
         {
           files.length
-            ? files.map((file, i) => <PreviewImage key={i} url={getUrlFile(file)}/>)
-            : <PreviewImage url={urlImage || '/no_image.jpeg'} /> /* {`url('/no_image.jpeg')`} */ }
-      </Box>
+            ? files.map((file, i) => (
+              <Box key={i} cursor='alias' onClick={() => removeFile(file.name)}>
+                <PreviewImage
+                  
+                  url={getUrlFile(file)}
+                />
+              </Box>
+            ))
+            : <PreviewImage url={urlImage || '/no_image.jpeg'} />}
+      </Grid>
     </Box>
   )
 }

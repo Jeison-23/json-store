@@ -7,7 +7,7 @@ import { ComponetInputFormik } from '@/common/ComponetInputFormik'
 import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 
 export const PostForm = (props) => {
-  const { initialValues, dataSelect, onSubmit } = usePostForm(props)
+  const { initialValues, dataSelect, onSubmit, loading } = usePostForm(props)
 
   return (
     <Formik
@@ -36,6 +36,7 @@ export const PostForm = (props) => {
               variant='outline'
               justifySelf='end'
               colorScheme='teal'
+              isLoading={loading}
             >
               Aceptar
             </Button>

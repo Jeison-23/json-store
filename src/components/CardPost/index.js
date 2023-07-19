@@ -13,50 +13,59 @@ export const CardPost = (props) => {
   return (
     <Box>
       <Grid
-      borderRadius='md'
-      borderWidth={1}
-      minH='300px'
-      gap={2}
-      px={2}
-      py={1}
-    >
-      <Grid bg={type === 'info' ? 'blue.700' : type === 'warn' ? 'red.700' : type === 'prom' ? 'yellow.600' : 'gray.400'} justifyItems='center'>
-        <Text
-          as='b'
-          fontSize='2xl'
-          textTransform='capitalize'
+        borderRadius='lg'
+        borderWidth={1}
+        minH='150px'
+        gap={1}
+        //px={1}
+        //py={1}
+      >
+        <Grid
+          minH='10px'
+          borderTopRadius='lg'
+          justifyItems='center'
+          alignItems='center'
+          color='#FFFFFF'
+          bg={type === 'info' ? 'blue.700' : type === 'warn' ? 'red.700' : type === 'prom' ? 'yellow.500' : 'gray.400'}
         >
-          {title || 'Title post+'}
-        </Text>
-      </Grid>
-
-      {images.length
-        ? <Grid gap={2} templateColumns={`repeat(${images.length >= 2 ? 3 : 1}, 1fr)`} >
-          {
-            images.map((image, i) => (
-              <Img
-                justifySelf='center'
-                h='270px'
-                width='300px'
-                src={image}
-                key={i}
-              />
-            ))
-          }
+          <Text
+            as='b'
+            fontSize='2xl'
+            textTransform='capitalize'
+          >
+            {title || 'Title post+'}
+          </Text>
         </Grid>
-        : undefined
-      }
-      <Text _firstLetter={{textTransform: 'uppercase'}} fontSize='lg' justifySelf='center'>
-        {description}
-      </Text>
 
-      <Flex>
-        {link ? <Button variant='outline' justifySelf='end'>Go</Button>
-          : undefined
-        }
-      </Flex>
-    </Grid>
+        <Grid px={2} gap={4}>
+          {images.length
+            ? <Grid gap={2} templateColumns={`repeat(${images.length >= 2 ? 3 : 1}, auto)`} >
+              {
+                images.map((image, i) => (
+                  <Img
+                    justifySelf='center'
+                    maxH='270px'
+                    maxW='300px'
+                    src={image}
+                    key={i}
+                  />
+                ))
+              }
+            </Grid>
+            : undefined
+          }
+          <Text _firstLetter={{ textTransform: 'uppercase' }} fontSize='lg' justifySelf='center'>
+            {description}
+          </Text>
+
+          {link ?
+            <Flex>
+              <Button variant='outline' justifySelf='end'>Go</Button>
+            </Flex>
+            : undefined}
+        </Grid>
+
+      </Grid>
     </Box>
-
   )
 }

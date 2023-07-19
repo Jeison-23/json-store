@@ -52,6 +52,7 @@ export const usePostForm = ({refresh, modalPost}) => {
   return {
     dataSelect,
     initialValues,
+    loading,
     onSubmit
   }
 }

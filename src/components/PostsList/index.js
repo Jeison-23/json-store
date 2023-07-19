@@ -4,7 +4,7 @@ import { CardPost } from '../CardPost'
 
 export const PostsList = ({data, loading}) => {
   return (
-    <Grid gap={2} p={2}>
+    <Grid position='relative' gap={2} p={2}>
       {
         data?.length ?
         data.map((post,i) => (
@@ -19,6 +19,7 @@ export const PostsList = ({data, loading}) => {
         ))
         : undefined
       }
+      
     </Grid>
   )
 }

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
+      "@/css": ["./src/css"],
       "@/hooks": ["./src/hooks"],
       "@/constants": ["./src/constants"],
       "@/helpers": ["./src/helpers"],

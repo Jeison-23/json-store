@@ -1,0 +1,33 @@
+.button {
+  display: grid;
+  height: 60px;
+  width: 60px;
+  top: 90%;
+  left: 90vw;
+  background: #90CDF4;
+  color: #1A202C;
+  position: fixed;
+  cursor: pointer;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  animation: btnAnimation 2s ease-in  infinite;
+}
+
+.button:hover {
+  color: #EBF8FF;
+  background: #3182CE;
+  animation-play-state: paused;
+}
+
+@keyframes btnAnimation{
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}

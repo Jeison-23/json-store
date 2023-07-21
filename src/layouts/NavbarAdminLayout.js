@@ -50,12 +50,14 @@ export const NavbarAdminLayout = ({ children }) => {
           </Text>
           </Link>
 
+          <Link href='/admin/products'>
           <Text
             cursor='pointer'
             _hover={{}}
           >
             Productos
           </Text>
+          </Link>
 
           <Link href='/admin/categories'>
             <Text

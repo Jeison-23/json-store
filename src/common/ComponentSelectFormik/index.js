@@ -18,6 +18,7 @@ export const ComponentSelectFormik = (props) => {
     loading = false,
     labelField = 'label',
     valueField = 'value',
+    ...rest
   } = props
 
   const [firstRender, setFirstRender] = useState(true)
@@ -58,7 +59,7 @@ export const ComponentSelectFormik = (props) => {
 
   return (
     <HandleClickOutside click={() => setShowList(false)}>
-      <Grid gap={2} position='relative'>
+      <Grid gap={2} position='relative' {...rest}>
         <Flex gap={1}>
           <Text fontSize={labelSize}>{label}</Text>
           <Text fontSize={labelSize} color='tomato'>{`${required ? '*' : ''}`}</Text>
@@ -86,11 +87,12 @@ export const ComponentSelectFormik = (props) => {
           ? (
             <Grid
               position='absolute'
-              zIndex='100'
+              zIndex='10'
               gap={1}
-              top='74px'
-              minW='400px'
-              left='9px'
+              top='75px'
+              width='95%'
+              left='2.5%'
+              p={1}
               bg={bgList}
             >
               {data.length

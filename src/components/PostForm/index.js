@@ -28,7 +28,7 @@ export const PostForm = (props) => {
               Imagenes
             </ButtonImageFile>
  
-            <ComponetInputFormik name='description' label='Descripción' required />
+            <ComponetInputFormik type='textarea' name='description' label='Descripción' />
             
             <Button
               size='sm'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'formik'
-import { Box, Flex, Grid, Input, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, Input, Text, Textarea } from '@chakra-ui/react'
 
 export const ComponetInputFormik = (props) => {
   const {
@@ -14,10 +14,12 @@ export const ComponetInputFormik = (props) => {
     placeholder = '',
     isDisabled = false,
     onChangeInput = () => { },
+    ...rest
   } = props
 
   return (
-    <Field name={name}>
+    <Grid {...rest}>
+      <Field name={name}>
       {({
         field, // { name, value, onChange, onBlur }
         form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
@@ -27,24 +29,37 @@ export const ComponetInputFormik = (props) => {
             <Text fontSize={labelSize}>{label}</Text>
             <Text fontSize={labelSize} color='tomato'>{`${required ? '*' : ''}`}</Text>
           </Flex>
-          <Input
-            {...field}
-            type={type}
-            size={size}
-            variant={variant}
-            isDisabled={isDisabled}
-            placeholder={placeholder}
-            onChange={(v) => {
-              field.onChange(v)
-              onChangeInput(v.target.value)
-            }}
-            isInvalid={meta.touched && meta.error}
-          />
+          {
+            ['text','number', 'password'].includes(type)
+              ? <Input
+                {...field}
+                type={type}
+                size={size}
+                variant={variant}
+                isDisabled={isDisabled}
+                placeholder={placeholder}
+                onChange={(v) => {
+                  field.onChange(v)
+                  onChangeInput(v.target.value)
+                }}
+                isInvalid={meta.touched && meta.error}
+              />
+              : <Textarea
+                {...field}
+                size={size}
+                onChange={(v) => {
+                  field.onChange(v)
+                  onChangeInput(v.target.value)
+                }}
+                isInvalid={meta.touched && meta.error}
+              />
+          }
           {meta.touched && meta.error && (
             <Text fontSize='xs' color='tomato' className="error">{meta.error}</Text>
           )}
         </Grid>
       )}
     </Field>
+    </Grid>
   )
 }

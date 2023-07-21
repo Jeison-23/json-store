@@ -29,7 +29,6 @@ export const usePostForm = ({refresh, modalPost}) => {
   ]
 
   const onSubmit = async (values) => {
-    console.log(values)
     try {
       await createPost( {variables: { input: values }})
       
@@ -42,7 +41,6 @@ export const usePostForm = ({refresh, modalPost}) => {
     if (error) {
       console.log('ha ocurrido un error', error)
     } else if (data?.postSave) {
-      console.log('all good');
       refresh()
       modalPost.onClose()
     }

@@ -16,7 +16,7 @@ export const CategoryContainer = () => {
 
   const action = [
     {
-      label: 'nueva',
+      label: 'Nueva',
       handleAction: () => modalForm.onOpen(),
     },
     {

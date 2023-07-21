@@ -1,24 +1,27 @@
 import React from 'react'
-import { Grid } from '@chakra-ui/react'
-import { CardPost } from '../CardPost'
-import { ComponentModal } from '@/common/ComponentModal'
 import { PostForm } from '../PostForm'
+import { CardPost } from '../CardPost'
+import { Box, Divider, Grid } from '@chakra-ui/react'
+import { ComponentModal } from '@/common/ComponentModal'
 
 export const PostsList = ({refresh, data, loading, modalPost}) => {
   return (
-    <Grid position='relative' gap={4} p={2}>
+    <Grid position='relative' gap={5} p={2}>
       {
         data?.length ?
         data.map((post,i) => (
-          <CardPost
-            key={i}
-            createAt={post?.createAt}
-            type={post?.type}
-            title={post?.title}
-            images={post?.images}
-            description={post?.description}
-            link={post?.link}
-          />
+          <Grid gap={4}>
+            {i > 0 ? <Divider /> : undefined}
+            <CardPost
+              key={i}
+              createAt={post?.createAt}
+              type={post?.type}
+              title={post?.title}
+              images={post?.images}
+              description={post?.description}
+              link={post?.link}
+            />
+          </Grid>
         ))
         : undefined
       }

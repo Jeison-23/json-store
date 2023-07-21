@@ -15,7 +15,7 @@ export const CardPost = (props) => {
   return (
     <Box>
       <Grid justifyItems='flex-end' px={2}>
-        <Text>{moment(createAt).format('DD MMM YY - hh:mm a')}</Text>
+        <Text fontFamily='fantasy' fontSize='sm' >{moment(createAt).format('DD MMM YY - hh:mm a')}</Text>
       </Grid>
       <Grid
         borderRadius='lg'

@@ -20,6 +20,11 @@
   animation-play-state: paused;
 }
 
+.button:active {
+  color: #d7e5ec;
+  background: #0d5fab;
+}
+
 @keyframes btnAnimation{
   0% {
     transform: translateY(-20px);

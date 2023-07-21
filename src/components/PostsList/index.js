@@ -12,6 +12,7 @@ export const PostsList = ({refresh, data, loading, modalPost}) => {
         data.map((post,i) => (
           <CardPost
             key={i}
+            createAt={post?.createAt}
             type={post?.type}
             title={post?.title}
             images={post?.images}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Button, Flex, Grid, Img, Text } from '@chakra-ui/react'
+import moment from 'moment/moment'
 
 export const CardPost = (props) => {
   const {
@@ -7,18 +8,20 @@ export const CardPost = (props) => {
     type = '',
     images = [],
     description,
+    createAt,
     link
   } = props
 
   return (
     <Box>
+      <Grid justifyItems='flex-end' px={2}>
+        <Text>{moment(createAt).format('DD MMM YY - hh:mm a')}</Text>
+      </Grid>
       <Grid
         borderRadius='lg'
         borderWidth={1}
-        minH='150px'
+        minH='130px'
         gap={1}
-        //px={1}
-        //py={1}
       >
         <Grid
           minH='10px'
@@ -37,7 +40,7 @@ export const CardPost = (props) => {
           </Text>
         </Grid>
 
-        <Grid px={2} gap={4}>
+        <Grid px={2} paddingBottom={2} gap={4}>
           {images.length
             ? <Grid gap={2} templateColumns={`repeat(${images.length >= 2 ? 3 : 1}, auto)`} >
               {
@@ -54,13 +57,15 @@ export const CardPost = (props) => {
             </Grid>
             : undefined
           }
-          <Text _firstLetter={{ textTransform: 'uppercase' }} fontSize='lg' justifySelf='center'>
-            {description}
-          </Text>
+          <Grid>
+            <Text _firstLetter={{ textTransform: 'uppercase' }} fontSize='lg' alignSelf='center' justifySelf='center'>
+              {description}
+            </Text>
+          </Grid>
 
           {link ?
             <Flex>
-              <Button variant='outline' justifySelf='end'>Go</Button>
+              <Button variant='outline' justifySelf='end'>Ir</Button>
             </Flex>
             : undefined}
         </Grid>

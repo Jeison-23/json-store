@@ -7,6 +7,7 @@ export const Post = gql`
       type
       title
       images
+      createAt
       description
       link
     }

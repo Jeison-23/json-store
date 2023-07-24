@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Product } from '@/graphql/products'
 import { category } from '@/graphql/category'
 import { useLazyQuery } from '@apollo/client'
-import { useDisclosure, useQuery } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
 export const useAdminProductContainer = () => {
   const productForm = useDisclosure()
@@ -11,7 +11,7 @@ export const useAdminProductContainer = () => {
   const refreshProducts = (filter = {}) => {
     getProducts({
       variables: { filter: filter },
-      fetchPolicy: 'cache-and-network'
+      fetchPolicy: 'network-only'//'cache-and-network'
     })
   }
 
@@ -26,13 +26,11 @@ export const useAdminProductContainer = () => {
     }
   ]
 
-  const {
-    data: categoryData,
-    loading: categoryLoading,
-  } = useQuery(category, { variables: {} })
+  const [getCategory, { data: categoryData, loading: categoryLoading}] = useLazyQuery(category, { variables: {}})
 
   useEffect(() => {
     refreshProducts()
+    getCategory({})
   }, [])
   
 

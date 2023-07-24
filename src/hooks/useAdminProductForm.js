@@ -3,16 +3,22 @@ import { useMutation } from '@apollo/client'
 import { messages } from '@/constants/messages'
 import { ProductSave } from '@/graphql/products'
 
-export const useAdminProductForm = ({refreshProducts, productForm}) => {
+export const useAdminProductForm = (props) => {
+  const {
+    refreshProducts,
+    productSelected,
+    productForm
+  } = props
   const [createProduct, { data, error, loading }] = useMutation(ProductSave)
+
   const initialValues = {
-    _id: null,
-    name: '',
-    images: [],
-    categoryId: '',
-    description: '',
-    price: 0,
-    stock: 0
+    _id: productSelected?._id || null,
+    name: productSelected?.name || '',
+    images: productSelected?.images || [],
+    categoryId: productSelected?.category?._id || '',
+    description: productSelected?.description || '',
+    price: productSelected?.price || 0,
+    stock: productSelected?.stock || 0
   }
 
   const validate = (values) => {
@@ -29,6 +35,8 @@ export const useAdminProductForm = ({refreshProducts, productForm}) => {
 
   const onSubmit = async (values) => {
     try {
+      delete values.__typename
+      if (typeof values.images[0] === 'string') values.images = null
       await createProduct({ variables: { input: values } })
     } catch (e) {
       console.log(e);
@@ -43,8 +51,7 @@ export const useAdminProductForm = ({refreshProducts, productForm}) => {
       productForm.onClose()
     }
   }, [data])
-  
-  
+
   return {
     initialValues,
     validate,

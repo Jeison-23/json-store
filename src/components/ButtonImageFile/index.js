@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useFormikContext } from 'formik'
-import { Box, Button, Grid, } from '@chakra-ui/react'
 import { PreviewImage } from '../PreviewImage'
+import { Box, Button, Grid, } from '@chakra-ui/react'
 
 export const ButtonImageFile = (props) => {
   const { values, setFieldValue } = useFormikContext()
@@ -16,6 +16,7 @@ export const ButtonImageFile = (props) => {
     state = [],
     setState = () => { },
     multiple = false,
+    editar = false
   } = props
 
   const [urlImage, setUrlImage] = useState('')
@@ -25,7 +26,9 @@ export const ButtonImageFile = (props) => {
     if (values[name]) {
       if (typeof values[name] === 'string') {
         setUrlImage(values[name])
-      }else{
+      } else if ( Array.isArray(values[name])) {
+        setUrlImage(values[name])
+      } else {
         setUrlImage('')
       }
     }
@@ -34,7 +37,7 @@ export const ButtonImageFile = (props) => {
   useEffect(() => {
     if (files.length) {
       setFieldValue(name, files)
-      setState(files)
+      // setState(files)
     }
   }, [files])
 
@@ -91,13 +94,16 @@ export const ButtonImageFile = (props) => {
           files.length
             ? files.map((file, i) => (
               <Box key={i} cursor='alias' onClick={() => removeFile(file.name)}>
-                <PreviewImage
-                  
-                  url={getUrlFile(file)}
-                />
+                <PreviewImage url={getUrlFile(file)} />
               </Box>
             ))
-            : <PreviewImage url={urlImage || '/no_image.jpeg'} />}
+            : !editar ? <PreviewImage url={'/no_image.jpeg'} />
+              : Array.isArray(urlImage)
+                ? urlImage.map((url, i) => <PreviewImage key={i} url={url || '/no_image.jpeg'} />)
+                : <PreviewImage url={urlImage || '/no_image.jpeg'} />
+
+
+        }
       </Grid>
     </Box>
   )

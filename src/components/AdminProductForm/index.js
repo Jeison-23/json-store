@@ -6,13 +6,20 @@ import { ComponetInputFormik } from '@/common/ComponetInputFormik'
 import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 import { useAdminProductForm } from '@/hooks/useAdminProductForm'
 
-export const AdminProductForm = ({refreshProducts, productForm, categoryData }) => {
+export const AdminProductForm = (props) => {
+  const {
+    refreshProducts,
+    productSelected,
+    productForm,
+    categoryData
+  } = props
+
   const {
     initialValues,
     validate,
     onSubmit,
     loading,
-  } = useAdminProductForm({refreshProducts,productForm})
+  } = useAdminProductForm(props)
 
   return (
     <Formik
@@ -32,6 +39,7 @@ export const AdminProductForm = ({refreshProducts, productForm, categoryData }) 
               name='images'
               accept="image/*"
               multiple
+              editar={productSelected?._id}
             >
               Producto
             </ButtonImageFile>

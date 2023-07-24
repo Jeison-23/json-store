@@ -5,6 +5,7 @@ export const Product = gql`
     product {
       _id
       name
+      images
       description
       category {
         _id

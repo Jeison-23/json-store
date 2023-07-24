@@ -38,7 +38,8 @@ export const UserForm = (props) => {
                   <ButtonImageFile
                     size='sm'
                     accept="image/*"
-                    name='image'               
+                    name='image'
+                    editar={userSelected?._id}           
                   >
                     Seleccionar Imagen
                   </ButtonImageFile>

@@ -1,6 +1,7 @@
 'use client'
 
 import { NavbarAdminLayout } from '@/layouts/NavbarAdminLayout'
+import { NavbarMainLayout } from '@/layouts/NavbarMainLayout'
 import { usePathname } from 'next/navigation'
 
 export const Layouts = ({ children}) => {
@@ -11,14 +12,11 @@ export const Layouts = ({ children}) => {
 
     switch (true) {
       case path.includes('/admin/'):
-        element = <NavbarAdminLayout>
-          {children}
-        </NavbarAdminLayout>
+        element = <NavbarAdminLayout children={children} /> 
         break;
 
       default:
-        element = children
-        console.log('default');
+        element = <NavbarMainLayout children={children} />
         break;
     }
     return element

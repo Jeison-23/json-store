@@ -6,7 +6,7 @@ import { FloatButton } from '@/components/FloatButton'
 import { usePostsContainer } from '@/hooks/usePostsContainer'
 import { ComponentPageHeader } from '@/common/ComponentPageHeader'
 
-export const PostsContainer = () => {
+export const PostsContainer = ({admin}) => {
   const {
     data,
     loading,
@@ -20,7 +20,7 @@ export const PostsContainer = () => {
       <Grid justifyContent='center'>
         <PostsList modalPost={modalPost} refresh={refresh} data={data?.post} loading={loading} />
       </Grid>
-      <FloatButton action={modalPost.onOpen}> Nuevo</FloatButton>
+      {admin && <FloatButton action={modalPost.onOpen}>Nuevo</FloatButton>}
     </Grid>
   )
 }

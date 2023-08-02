@@ -98,11 +98,11 @@ export const ButtonImageFile = (props) => {
               </Box>
             ))
             : !editar ? <PreviewImage url={'/no_image.jpeg'} />
-              : Array.isArray(urlImage)
-                ? urlImage.map((url, i) => <PreviewImage key={i} url={url || '/no_image.jpeg'} />)
-                : <PreviewImage url={urlImage || '/no_image.jpeg'} />
-
-
+              : !urlImage.length
+                ? <PreviewImage url={'/no_image.jpeg'} />
+                : Array.isArray(urlImage)
+                  ? urlImage.map((url, i) => <PreviewImage key={i} url={url || '/no_image.jpeg'} />)
+                  : <PreviewImage url={urlImage || '/no_image.jpeg'} />
         }
       </Grid>
     </Box>

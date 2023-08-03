@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Flex, Grid, Icon, Text, useColorModeValue } from '@chakra-ui/react'
+import { useFormikContext } from 'formik'
 import { HandleClickOutside } from '../HandleClickOutside'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { useFormikContext } from 'formik'
+import { Box, Flex, Grid, Icon, Text, useColorModeValue } from '@chakra-ui/react'
 
 export const ComponentSelectFormik = (props) => {
   const { values, setFieldValue } = useFormikContext()
-  const bgInput = useColorModeValue('#EDF2F7','#2D3748') // #262B36 dark #EDF2F7 Ligth
-  const bgList = useColorModeValue('#F7FAFC','#262B36')
+  const bgList = useColorModeValue('#F7FAFC', '#262B36')
 
   const {
     name,
@@ -41,18 +40,18 @@ export const ComponentSelectFormik = (props) => {
       if (values[name]) {
         const found = data.find(item => item[valueField] === values[name])
         if (found) setItemSelected(found)
-      }
-    } else {
-      console.log('debes darle un nombre al componente');
-    }
-    
-  }, [])
+
+      } else setItemSelected({})
+
+    } else console.log('debes darle un nombre al componente')
+
+  }, [values])
 
   useEffect(() => {
     if (firstRender) {
       setFirstRender(false)
     } else {
-      if (itemSelected[valueField]) setFieldValue(name,itemSelected[valueField])
+      if (itemSelected[valueField]) setFieldValue(name, itemSelected[valueField])
     }
 
   }, [itemSelected])
@@ -64,7 +63,7 @@ export const ComponentSelectFormik = (props) => {
           <Text fontSize={labelSize}>{label}</Text>
           <Text fontSize={labelSize} color='tomato'>{`${required ? '*' : ''}`}</Text>
         </Flex>
-  
+
         <Grid
           px={4}
           h='40px'

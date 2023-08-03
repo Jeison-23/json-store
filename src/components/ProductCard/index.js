@@ -11,7 +11,7 @@ export const ProductCard = (props) => {
   } = props
 
   return (
-    <Grid bg='#FFFFFF' p={2.5} borderWidth='1px' gap={2} _hover={{ filter: 'brightness(95%)'}}>
+    <Grid bg='#FFFFFF' opacity='0.8' p={2.5} borderWidth='1px' gap={2} _hover={{ filter: 'brightness(95%)'}}>
       <Grid  justifyItems='center'>
         {
           images.length > 1

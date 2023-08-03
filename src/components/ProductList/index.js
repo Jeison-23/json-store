@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid } from '@chakra-ui/react'
 import { ProductCard } from '../ProductCard'
+import { ProductCardLoader } from '../ProductCard/loader'
 
 export const ProductList = (props) => {
   const { data = [], loading, } = props
@@ -10,14 +11,14 @@ export const ProductList = (props) => {
       {
         !loading
           ? data.length
-            ? <Grid gap={2} templateColumns='1fr 1fr 1fr'>
+            ? <Grid gap={2} templateColumns='repeat(3, auto)'>
               {data.map((item, i) => (
                 <ProductCard key={i} {...item} />
               ))
               }
             </Grid>
-            : 'sin datos'
-          : 'loading'
+            : 'Sin datos'
+          : <ProductCardLoader />
       }
     </Grid>
   )

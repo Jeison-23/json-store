@@ -4,16 +4,16 @@ import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { Box, Flex, Grid, Icon, Text } from '@chakra-ui/react'
 
-export const NavbarMainLayout = ({ children }) => {
+export const NavbarMainLayout = ({ path, children }) => {
 
   return (
     <Box>
       <Grid
         p={4}
         gap={4}
-        bg='blue.900'
-        color='#FFFFFF'
-        templateColumns='1fr 1fr 1fr'
+        bg='#000000'
+        color='#E3E0FB'
+        templateColumns='auto 1fr 1fr'
       >
         <Flex justifyContent='start'>
           <Link href='/home-page'>
@@ -41,12 +41,16 @@ export const NavbarMainLayout = ({ children }) => {
           alignItems='center'
         >
           <Link href='/products'>
-          <Text
-            cursor='pointer'
-            _hover={{}}
-          >
-            Productos
-          </Text>
+            <Text
+              cursor='pointer'
+              as={path === '/products' && 'b'}
+              alignSelf='end'
+              textTransform={path === '/products' && 'uppercase'}
+              // fontSize={path === '/products' && 'lg'}
+              textShadow={path === '/products' && '0px 0px 8px #CC6BEE, 0px 0px 8px #CC6BEE '}
+            >
+              Productos
+            </Text>
           </Link>
         </Flex>
 
@@ -55,8 +59,16 @@ export const NavbarMainLayout = ({ children }) => {
           alignItems='center'
           justifyContent='flex-end'
         >
-          
-          Opciones de usuarios
+          <Link href='/login'>
+            <Text
+              as={path === '/login' && 'b'}
+              textShadow={path === '/login' && '0px 0px 8px #CC6BEE'}
+              textTransform={path === '/login' && 'uppercase'}
+              cursor='pointer'
+            >
+              login
+            </Text>
+          </Link>
         </Flex>
       </Grid>
 

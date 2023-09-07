@@ -11,8 +11,8 @@ export const NavbarAdminLayout = ({ children }) => {
       <Grid
         p={4}
         gap={4}
-        bg='blue.900'
-        color='#FFFFFF'
+        bg='#000000'
+        color='#E3E0FB'
         templateColumns='1fr 1fr 1fr'
       >
         <Flex justifyContent='start'>

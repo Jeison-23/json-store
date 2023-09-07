@@ -7,6 +7,7 @@ export const useGeneralFunction = () => {
   const alertToast = (parameters) => {
     const {
       title = '',
+      position = 'bottom',
       description = '',
       status = 'success',
       duration = 3000
@@ -18,6 +19,7 @@ export const useGeneralFunction = () => {
       status: status,
       duration: duration,
       isClosable: true,
+      position: position
     })
   }
 

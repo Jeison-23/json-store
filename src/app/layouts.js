@@ -16,7 +16,7 @@ export const Layouts = ({ children}) => {
         break;
 
       default:
-        element = <NavbarMainLayout children={children} />
+        element = <NavbarMainLayout path={path} children={children} />
         break;
     }
     return element

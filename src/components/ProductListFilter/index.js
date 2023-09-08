@@ -6,10 +6,11 @@ import { useProductListFilter } from '@/hooks/useProductListFilter'
 import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 
 export const ProductListFilter = ({dataCategory, refreshProducts}) => {
-  const { initialValues, onSubmit } = useProductListFilter({refreshProducts})
+  const { initialValues, validate, onSubmit } = useProductListFilter({refreshProducts})
   return (
     <Formik
       initialValues={initialValues}
+      validate={validate}
       onSubmit={onSubmit}
     >
       {() => (
@@ -33,6 +34,15 @@ export const ProductListFilter = ({dataCategory, refreshProducts}) => {
               label='Categoria'
               data={dataCategory}
             /> */}
+            <Text>Rango de Precio:</Text>
+            <ComponetInputFormik
+              name='from'
+              type='number'
+            />
+            <ComponetInputFormik
+              name='upTo'
+              type='number'
+            />
             <Flex gap={2} justifyContent='space-between'>
               <Button
                 size='xs'

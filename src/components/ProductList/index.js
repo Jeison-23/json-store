@@ -11,7 +11,11 @@ export const ProductList = (props) => {
       {
         !loading
           ? data.length
-            ? <Grid gap={2} templateColumns='repeat(3, auto)'>
+            ? <Grid gap={2} templateColumns={{
+              xl: 'repeat(3, auto)',
+              lg: 'repeat(2, auto)',
+              sm: 'repeat(1, auto)'
+            }}>
               {data.map((item, i) => (
                 <ProductCard key={i} {...item} />
               ))

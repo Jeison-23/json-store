@@ -16,37 +16,39 @@ export const ProductListFilter = ({dataCategory, refreshProducts}) => {
         <Form>
           <Grid gap={2} position='fixed' >
             <Text as='b' fontSize='2xl' >Filtrar productos</Text>
-            <ComponetInputFormik
+            {/* <ComponetInputFormik
               type='text'
               name='name'
               label='Nombre'
-            />
+            /> */}
             <ComponetInputFormik
               name='price'
               type='number'
               label='Precio'
             />
-            <ComponentSelectFormik
+            {/* <ComponentSelectFormik
               valueField='_id'
               labelField='name'
               name='categoryId'
               label='Categoria'
               data={dataCategory}
-            />
-            <Flex gap={2} justifyContent='end'>
+            /> */}
+            <Flex gap={2} justifyContent='space-between'>
               <Button
-                size='sm'
+                size='xs'
                 type='reset'
-                colorScheme='red'
+                variant='outline'
+                colorScheme='orange'
                 onClick={()=>refreshProducts()}
               >
                 Limpiar
               </Button>
 
               <Button
-                size='sm'
+                size='xs'
                 type='submit'
-                colorScheme='blue'
+                variant='outline'
+                colorScheme='purple'
               >
                 Buscar
               </Button>

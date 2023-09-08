@@ -1,9 +1,11 @@
 'use client'
 import React from 'react'
-import { Box, Grid } from '@chakra-ui/react'
+import { Form, Formik } from 'formik'
+import { Box, Flex, Grid } from '@chakra-ui/react'
 import { ProductList } from '@/components/ProductList'
 import { useProductContainer } from '@/hooks/useProductContainer'
 import { ProductListFilter } from '@/components/ProductListFilter'
+import { ProductListFilterHorizon } from '@/components/ProductListFilterHorizon'
 
 export const ProductContainer = () => {
   const {
@@ -25,7 +27,13 @@ export const ProductContainer = () => {
           loadingCategory={loadingCategory}
         />
       </Box>
-      <ProductList loading={loading} data={data?.product} />
+      <Grid gap={2} >
+        <ProductListFilterHorizon
+          dataCategory={dataCategory?.category}
+          refreshProducts={refreshProducts}
+        />
+        <ProductList loading={loading} data={data?.product} />
+      </Grid>
     </Grid>
   )
 }

@@ -13,10 +13,11 @@ export const PostsList = (props) => {
   } = props
 
   return (
-    <Grid position='relative' gap={5} p={2}>
+    <Grid position='relative' maxW={{xl: '800px', lg: '600px', sm: '400px'}} gap={5} p={2}>
       {
         data?.length ?
         data.map((post,i) => (
+          /*post.images.length*/ true ?
           <Grid key={i} gap={4}>
             {i > 0 ? <Divider /> : undefined}
             <CardPost
@@ -28,6 +29,7 @@ export const PostsList = (props) => {
               link={post?.link}
             />
           </Grid>
+          : undefined
         ))
         : undefined
       }

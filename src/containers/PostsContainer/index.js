@@ -16,7 +16,7 @@ export const PostsContainer = ({admin}) => {
 
   return (
     <Grid m={4} >
-      <ComponentPageHeader title='Publicaciones' />
+      {/* <ComponentPageHeader title='Publicaciones' /> */}
       <Grid justifyContent='center'>
         <PostsList modalPost={modalPost} refresh={refresh} data={data?.post} loading={loading} />
       </Grid>

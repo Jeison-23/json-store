@@ -24,8 +24,9 @@ export const DetailProductCard = (props) => {
         position='relative'
         borderLeftRadius='lg'
         alignContent='center'
-        onMouseEnter={() => setShowImagesActions(state => !state)}
-        onMouseLeave={() => setShowImagesActions(state => !state)}
+        _hover={{ filter: 'brightness(95%)'}}
+        onMouseEnter={() => setShowImagesActions(true)}
+        onMouseLeave={() => setShowImagesActions(false)}
       >
         <Text position='absolute' right={0} color='#111111' >{`${imagesPos + 1}/${data?.images.length}`}</Text>
         {showImagesActions ?
@@ -61,6 +62,7 @@ export const DetailProductCard = (props) => {
             justifySelf='center'
             minH='250px'
             maxW='450px'
+            // clipPath='circle(58%)'
             src={data?.images[imagesPos]}
           />
           : undefined

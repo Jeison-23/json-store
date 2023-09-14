@@ -1,19 +1,19 @@
 import React from 'react'
-import { Button, useColorMode } from '@chakra-ui/react'
+import { FiSun } from 'react-icons/fi'
+import { MdOutlineModeNight } from 'react-icons/md'
+import { Icon, useColorMode } from '@chakra-ui/react'
 
 export const ThemeSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Button
+    <Icon
       size='sm'
-      bg='gray.900'
+      boxSize={5}
       color='#FFF'
-      //variant='link'
+      cursor='pointer'
       onClick={toggleColorMode}
-      _hover={{ bg: 'gray.700' }}
-    >
-      {colorMode === 'light' ? 'Ligth' : 'Dark'}
-    </Button>
+      as={colorMode === 'light' ? MdOutlineModeNight : FiSun }
+    />
   )
 }

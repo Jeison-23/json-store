@@ -65,19 +65,23 @@ export const DetailProductCArdInfo = ({ data }) => {
           </Flex>
 
           <Formik initialValues={{ count: 1 }}>
-            {() => (
+            {({ values, setFieldValue }) => (
               <Form>
-                <Grid marginY={4} gap={2}>
-                <ComponetInputFormik
-                  required
-                  maxW='30px'
-                  name='count'
-                  type='number'
-                  label='Cantidad'
-                />
-                <Button alignSelf='end' >
-                  Agregar al carrito
-                </Button>
+                <Grid position='relative' marginY={4} gap={2}>
+                  <ComponetInputFormik
+                    required
+                    maxW='30px'
+                    name='count'
+                    type='number'
+                    label='Cantidad'
+                  />
+                  <Grid left='68px' top={6} position='absolute' gap={1}>
+                    <Button variant='link' size='md' onClick={() => setFieldValue('count', values.count + 1)}>+</Button>
+                    <Button variant='link' size='md' onClick={() => setFieldValue('count', values.count - 1)}>-</Button>
+                  </Grid>
+                  <Button alignSelf='end' >
+                    Agregar al carrito
+                  </Button>
                 </Grid>
               </Form>
             )}

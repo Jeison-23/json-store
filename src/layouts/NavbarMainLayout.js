@@ -61,7 +61,16 @@ export const NavbarMainLayout = ({ path, children }) => {
           alignItems='center'
           justifyContent='flex-end'
         >
-          <Button size='sm' onClick={shopCar.onOpen} leftIcon={<AiOutlineShoppingCart />} variant='outline' >
+          <ThemeSwitcher />
+          <Button
+            size='sm'
+            bg='gray.900'
+            color='#FFFFFF'
+            // variant='link'
+            onClick={shopCar.onOpen}
+            _hover={{ bg: 'gray.800' }}
+            leftIcon={<AiOutlineShoppingCart />}
+          >
             Carrito
           </Button>
           <Link href='/login'>

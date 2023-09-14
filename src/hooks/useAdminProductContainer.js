@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Product } from '@/graphql/products'
 import { category } from '@/graphql/category'
 import { useLazyQuery } from '@apollo/client'
@@ -6,6 +6,7 @@ import { useDisclosure } from '@chakra-ui/react'
 
 export const useAdminProductContainer = () => {
   const productForm = useDisclosure()
+  const [setshowPreview, setShowPreview] = useState(false)
   const [getProducts, { data: productData, loading: productLoading, error: productError }] = useLazyQuery(Product)
 
   const refreshProducts = (filter = {}) => {
@@ -23,7 +24,11 @@ export const useAdminProductContainer = () => {
     {
       label: 'Refrescar',
       handleAction: () => refreshProducts(),
-    }
+    },
+    {
+      label: setshowPreview ? 'Visualisar' : 'Lista',
+      handleAction: () => setShowPreview(state => !state),
+    },
   ]
 
   const [getCategory, { data: categoryData, loading: categoryLoading}] = useLazyQuery(category, { variables: {}})
@@ -42,5 +47,6 @@ export const useAdminProductContainer = () => {
     refreshProducts,
     productData,
     productLoading,
+    setshowPreview,
   }
 }

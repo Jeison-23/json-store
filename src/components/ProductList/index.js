@@ -4,7 +4,7 @@ import { ProductCard } from '../ProductCard'
 import { ProductCardLoader } from '../ProductCard/loader'
 
 export const ProductList = (props) => {
-  const { data = [], loading, } = props
+  const { data = [], loading, noDetail = false } = props
 
   return (
     <Grid>
@@ -17,7 +17,11 @@ export const ProductList = (props) => {
               sm: 'repeat(1, auto)'
             }}>
               {data.map((item, i) => (
-                <ProductCard key={i} {...item} />
+                <ProductCard
+                  key={i}
+                  noDetail={noDetail}
+                  {...item}
+                />
               ))
               }
             </Grid>

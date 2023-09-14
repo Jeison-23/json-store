@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import { AiOutlineAppstoreAdd } from 'react-icons/ai'
+import { AiOutlineAppstoreAdd, AiOutlineShoppingCart } from 'react-icons/ai'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
-import { Box, Flex, Grid, Icon, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, Icon, Text, useDisclosure } from '@chakra-ui/react'
+import { ComponentDrawer } from '@/common/ComponentDrawer'
 
 export const NavbarMainLayout = ({ path, children }) => {
+  const shopCar = useDisclosure()
 
   return (
     <Box>
@@ -59,6 +61,9 @@ export const NavbarMainLayout = ({ path, children }) => {
           alignItems='center'
           justifyContent='flex-end'
         >
+          <Button size='sm' onClick={shopCar.onOpen} leftIcon={<AiOutlineShoppingCart />} variant='outline' >
+            Carrito
+          </Button>
           <Link href='/login'>
             <Text
               as={path === '/login' && 'b'}
@@ -76,6 +81,7 @@ export const NavbarMainLayout = ({ path, children }) => {
         overflowX='hidden' overflowY='auto' h='calc(100vh - 93px)'
       >
         {children}
+        <ComponentDrawer title='Carrito de compras' isOpen={shopCar.isOpen} onClose={shopCar.onClose} />
       </Box>
     </Box>
   )

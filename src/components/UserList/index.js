@@ -29,7 +29,14 @@ export const UserList = (props) => {
 
   return (
     <Box>
-      <Grid gap={2} templateColumns='1fr 1fr 1fr'>
+      <Grid
+        gap={2}
+        templateColumns={{
+          xl: 'repeat(3, auto)',
+          lg: 'repeat(2, auto)',
+          sm: 'repeat(1, auto)'
+        }}
+      >
         {
           !loading
             ? data?.user.length

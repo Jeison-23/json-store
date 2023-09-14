@@ -6,6 +6,7 @@ import { ComponentModal } from '@/common/ComponentModal'
 import { ComponentTable } from '@/common/ComponentTable'
 import { ComponentAlert } from '@/common/ComponentAlert'
 import { useAdminProductList } from '@/hooks/useAdminProductList'
+import { ProductList } from '../ProductList'
 
 export const AdminProductList = (props) => {
   const {
@@ -14,6 +15,7 @@ export const AdminProductList = (props) => {
     productData,
     productLoading,
     refreshProducts,
+    setshowPreview,
   } = props
 
   const {
@@ -28,12 +30,19 @@ export const AdminProductList = (props) => {
 
   return (
     <Grid>
-      <ComponentTable
-        tableHead={header}
-        loading={productLoading}
-        list={productData?.product}
-        actions={actions}
-      />
+      {setshowPreview ?
+        <ComponentTable
+          tableHead={header}
+          loading={productLoading}
+          list={productData?.product}
+          actions={actions}
+        />
+        :
+        <ProductList
+          data={productData?.product}
+          oading={productLoading}
+          noDetail
+        />}
       <ComponentModal
         size='2xl'
         title='Crear Producto'

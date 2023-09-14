@@ -8,13 +8,13 @@ import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 export const ProductListFilter = ({dataCategory, refreshProducts}) => {
   const { initialValues, validate, onSubmit } = useProductListFilter({refreshProducts})
   return (
-    <Formik
-      initialValues={initialValues}
-      validate={validate}
-      onSubmit={onSubmit}
-    >
-      {() => (
-        <Form>
+    // <Formik
+    //   initialValues={initialValues}
+    //   validate={validate}
+    //   onSubmit={onSubmit}
+    // >
+    //   {() => (
+    //     <Form>
           <Grid gap={2} position='fixed' >
             <Text as='b' fontSize='2xl' >Filtrar productos</Text>
             {/* <ComponetInputFormik
@@ -64,8 +64,8 @@ export const ProductListFilter = ({dataCategory, refreshProducts}) => {
               </Button>
             </Flex>
           </Grid>
-        </Form>
-      )}
-    </Formik>
+    //     </Form>
+    //   )}
+    // </Formik>
   )
 }

@@ -60,7 +60,7 @@ export const DetailProductCArdInfo = ({ data }) => {
               Precio:
             </Text>
             <Text>
-              {data?.price?.toLocaleString('es', { style: "currency", currency: "COP" })}
+              {data?.price?.toLocaleString('de', { style: "currency", currency: "COP" })}
             </Text>
           </Flex>
 

@@ -8,7 +8,7 @@ export const ThemeSwitcher = () => {
 
   return (
     <Icon
-      size='sm'
+      //size='sm'
       boxSize={5}
       color='#FFF'
       cursor='pointer'

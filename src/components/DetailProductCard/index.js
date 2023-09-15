@@ -29,7 +29,7 @@ export const DetailProductCard = (props) => {
         onMouseLeave={() => setShowImagesActions(false)}
       >
         <Text position='absolute' right={0} color='#111111' >{`${imagesPos + 1}/${data?.images.length}`}</Text>
-        {showImagesActions ?
+        {showImagesActions && imagesPos > 0 ?
           <Icon
             top={300}
             boxSize={10}
@@ -42,7 +42,7 @@ export const DetailProductCard = (props) => {
           />
           : undefined}
 
-        {showImagesActions ?
+        {showImagesActions && data?.images.length > (imagesPos + 1) ?
           <Icon
             right={0}
             top={300}
@@ -58,13 +58,24 @@ export const DetailProductCard = (props) => {
 
         {data?.images.length
           ?
-          <Img
+          <Box
+            w='250px'
+            h='250px'
+            bgPos='center'
+            bgSize='contain'
+            bgRepeat='no-repeat'
             justifySelf='center'
+            boxShadow='inset 0 0 15px 10px #FFFFFF'
+            bgImage={`url(${data?.images[imagesPos]})`}
+          />
+          /* 
+          <Img
             minH='250px'
             maxW='450px'
-            // clipPath='circle(58%)'
+            justifySelf='center'
             src={data?.images[imagesPos]}
           />
+          */
           : undefined
         }
       </Grid>

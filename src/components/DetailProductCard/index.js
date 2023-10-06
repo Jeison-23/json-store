@@ -1,11 +1,11 @@
 import React from 'react'
-import { Box, Button, Flex, Grid, Icon, Img, Text } from '@chakra-ui/react'
+import { Box, Grid, Icon, Img, Text } from '@chakra-ui/react'
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from 'react-icons/md'
 import { DetailProductCArdInfo } from '../DetailProductCArdInfo'
 
 export const DetailProductCard = (props) => {
   const {
-    data,
+    product,
     loading,
     prevImage,
     imagesPos,
@@ -28,7 +28,13 @@ export const DetailProductCard = (props) => {
         onMouseEnter={() => setShowImagesActions(true)}
         onMouseLeave={() => setShowImagesActions(false)}
       >
-        <Text position='absolute' right={0} color='#111111' >{`${imagesPos + 1}/${data?.images.length}`}</Text>
+        <Text
+          right={0}
+          color='#111111'
+          position='absolute'
+        >
+          {`${imagesPos + 1}/${product?.images.length}`}
+        </Text>
         {showImagesActions && imagesPos > 0 ?
           <Icon
             top={300}
@@ -42,7 +48,7 @@ export const DetailProductCard = (props) => {
           />
           : undefined}
 
-        {showImagesActions && data?.images.length > (imagesPos + 1) ?
+        {showImagesActions && product?.images.length > (imagesPos + 1) ?
           <Icon
             right={0}
             top={300}
@@ -51,12 +57,12 @@ export const DetailProductCard = (props) => {
             color='#000000'
             position='absolute'
             as={MdOutlineNavigateNext}
-            onClick={() => nextImage(data?.images.length)}
-            cursor={data?.images.length > (imagesPos + 1) ? 'pointer' : 'not-allowed'}
+            onClick={() => nextImage(product?.images.length)}
+            cursor={product?.images.length > (imagesPos + 1) ? 'pointer' : 'not-allowed'}
           />
           : undefined}
 
-        {data?.images.length
+        {product?.images.length
           ?
           <Box
             w='250px'
@@ -66,21 +72,21 @@ export const DetailProductCard = (props) => {
             bgRepeat='no-repeat'
             justifySelf='center'
             boxShadow='inset 0 0 15px 10px #FFFFFF'
-            bgImage={`url(${data?.images[imagesPos]})`}
+            bgImage={`url(${product?.images[imagesPos]})`}
           />
           /* 
           <Img
             minH='250px'
             maxW='450px'
             justifySelf='center'
-            src={data?.images[imagesPos]}
+            src={product?.images[imagesPos]}
           />
           */
           : undefined
         }
       </Grid>
 
-      <DetailProductCArdInfo data={data} />
+      <DetailProductCArdInfo product={product} />
     </Grid>
   )
 }

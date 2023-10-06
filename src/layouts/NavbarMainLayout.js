@@ -1,12 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
-import { AiOutlineAppstoreAdd, AiOutlineShoppingCart } from 'react-icons/ai'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
-import { Box, Button, Flex, Grid, Icon, Text, useDisclosure } from '@chakra-ui/react'
 import { ComponentDrawer } from '@/common/ComponentDrawer'
+import { ShopingCartProducts } from '@/components/ShopingCartProducts'
+import { AiOutlineAppstoreAdd, AiOutlineShoppingCart } from 'react-icons/ai'
+import { Box, Flex, Grid, Icon, Text, useDisclosure } from '@chakra-ui/react'
+import { ShopingcartProductsCount } from '@/components/ShopingcartProductsCount'
+import { ShopingCartProductsFooter } from '@/components/ShopingCartProductsFooter'
 
 export const NavbarMainLayout = ({ path, children }) => {
-  const shopCar = useDisclosure()
+  const shopingCartDrawer = useDisclosure()
 
   return (
     <Box>
@@ -57,22 +60,21 @@ export const NavbarMainLayout = ({ path, children }) => {
         </Flex>
 
         <Flex
-          gap={2}
+          gap={4}
           alignItems='center'
           justifyContent='flex-end'
         >
           <ThemeSwitcher />
-          <Button
-            size='sm'
-            bg='gray.900'
-            color='#FFFFFF'
-            // variant='link'
-            onClick={shopCar.onOpen}
-            _hover={{ bg: 'gray.800' }}
-            leftIcon={<AiOutlineShoppingCart />}
-          >
-            Carrito
-          </Button>
+          <Flex position='relative'>
+            <ShopingcartProductsCount />
+            <Icon
+              boxSize={5}
+              color='#FFF'
+              cursor='pointer'
+              onClick={shopingCartDrawer.onOpen}
+              as={AiOutlineShoppingCart}
+            />
+          </Flex>
           <Link href='/login'>
             <Text
               as={path === '/login' && 'b'}
@@ -87,10 +89,19 @@ export const NavbarMainLayout = ({ path, children }) => {
       </Grid>
 
       <Box
-        overflowX='hidden' overflowY='auto' h='calc(100vh - 93px)'
+        overflowY='auto'
+        overflowX='hidden'
+        h='calc(100vh - 93px)'
       >
         {children}
-        <ComponentDrawer title='Carrito de compras' isOpen={shopCar.isOpen} onClose={shopCar.onClose} />
+        <ComponentDrawer
+          size='md'
+          title='Carrito de compras'
+          isOpen={shopingCartDrawer.isOpen}
+          onClose={shopingCartDrawer.onClose}
+          body={<ShopingCartProducts shopingCartDrawer={shopingCartDrawer} />}
+          footer={ <ShopingCartProductsFooter shopingCartDrawer={shopingCartDrawer} /> }
+        />
       </Box>
     </Box>
   )

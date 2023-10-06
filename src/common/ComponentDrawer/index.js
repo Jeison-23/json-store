@@ -12,8 +12,10 @@ import {
 
 export const ComponentDrawer = (props) => {
   const {
-    title = '',
+    size = '',
     body = '',
+    title = '',
+    footer = '',
     onOpen = '',
     isOpen = false,
     onClose = () => {},
@@ -23,6 +25,7 @@ export const ComponentDrawer = (props) => {
 
   return (
       <Drawer
+        size={size}
         isOpen={isOpen}
         placement='right'
         onClose={onClose}
@@ -38,10 +41,7 @@ export const ComponentDrawer = (props) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
+           {footer}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

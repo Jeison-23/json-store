@@ -1,71 +1,50 @@
 import React from 'react'
-import { Form, Formik } from 'formik'
-import { Button, Flex, Grid, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, Text, useColorModeValue } from '@chakra-ui/react'
 import { ComponetInputFormik } from '@/common/ComponetInputFormik'
-import { useProductListFilter } from '@/hooks/useProductListFilter'
-import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 
-export const ProductListFilter = ({dataCategory, refreshProducts}) => {
-  const { initialValues, validate, onSubmit } = useProductListFilter({refreshProducts})
+export const ProductListFilter = ({ refreshProducts }) => {
+  const bg = useColorModeValue('WhiteAlpha.200','gray.800')
   return (
-    // <Formik
-    //   initialValues={initialValues}
-    //   validate={validate}
-    //   onSubmit={onSubmit}
-    // >
-    //   {() => (
-    //     <Form>
-          <Grid gap={2} position='fixed' >
-            <Text as='b' fontSize='2xl' >Filtrar productos</Text>
-            {/* <ComponetInputFormik
-              type='text'
-              name='name'
-              label='Nombre'
-            /> */}
-            <ComponetInputFormik
-              name='price'
-              type='number'
-              label='Precio'
-            />
-            {/* <ComponentSelectFormik
-              valueField='_id'
-              labelField='name'
-              name='categoryId'
-              label='Categoria'
-              data={dataCategory}
-            /> */}
-            <Text>Rango de Precio:</Text>
-            <ComponetInputFormik
-              name='from'
-              type='number'
-            />
-            <ComponetInputFormik
-              name='upTo'
-              type='number'
-            />
-            <Flex gap={2} justifyContent='space-between'>
-              <Button
-                size='xs'
-                type='reset'
-                variant='outline'
-                colorScheme='orange'
-                onClick={()=>refreshProducts()}
-              >
-                Limpiar
-              </Button>
+    <Grid p={1} position='fixed' bg={bg} h='100vh' zIndex={10} >
+      <Box>
+        <Grid gap={2}>
+        <Text as='b' fontSize='2xl' >Filtrar productos</Text>
+        <ComponetInputFormik
+          name='price'
+          type='number'
+          label='Precio'
+        />
+        <Text>Rango de Precio:</Text>
+        <ComponetInputFormik
+          name='from'
+          type='number'
+        />
+        <ComponetInputFormik
+          name='upTo'
+          type='number'
+        />
+        <Flex gap={2} justifyContent='space-between'>
+          <Button
+            size='xs'
+            type='reset'
+            variant='outline'
+            colorScheme='orange'
+            onClick={() => refreshProducts()}
+          >
+            Limpiar
+          </Button>
 
-              <Button
-                size='xs'
-                type='submit'
-                variant='outline'
-                colorScheme='purple'
-              >
-                Buscar
-              </Button>
-            </Flex>
-          </Grid>
-    //     </Form>
-    //   )}
-    // </Formik>
+          <Button
+            size='xs'
+            type='submit'
+            variant='outline'
+            colorScheme='purple'
+          >
+            Buscar
+          </Button>
+        </Flex>
+        </Grid>
+      </Box>
+    </Grid>
   )
 }

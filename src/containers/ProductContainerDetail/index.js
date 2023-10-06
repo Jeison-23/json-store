@@ -23,9 +23,10 @@ export const ProductContainerDetail = ({ productId }) => {
         <DetailProductCard
           setShowImagesActions={setShowImagesActions}
           showImagesActions={showImagesActions}
-          data={data} prevImage={prevImage}
+          prevImage={prevImage}
           nextImage={nextImage}
           imagesPos={imagesPos}
+          product={data}
         />
       }
     </Grid>

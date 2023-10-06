@@ -1,11 +1,10 @@
 import React from 'react'
-import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Button, Flex, Grid, Icon, Text } from '@chakra-ui/react'
-import { ComponetInputFormik } from '@/common/ComponetInputFormik'
+import { Flex, Grid, Icon, Text } from '@chakra-ui/react'
+import { DetailProductCardInfoForm } from '../DetailProductCardInfoForm'
 
-export const DetailProductCArdInfo = ({ data }) => {
+export const DetailProductCArdInfo = ({ product }) => {
   const router = useRouter()
 
   return (
@@ -32,10 +31,11 @@ export const DetailProductCArdInfo = ({ data }) => {
       <Grid >
         <Text
           as='b'
+          maxW='490px'
           fontSize='4xl'
           textAlign='center'
         >
-          {`${data?.category?.name} - ${data?.name}`}
+          {`${product?.category?.name} - ${product?.name}`}
         </Text>
 
         <Grid gap={2} mx={7}>
@@ -44,7 +44,7 @@ export const DetailProductCArdInfo = ({ data }) => {
             fontSize='xl'
             _firstLetter={{ textTransform: 'uppercase' }}
           >
-            {data?.description}
+            {product?.description}
           </Text>
 
           <Text
@@ -52,7 +52,7 @@ export const DetailProductCArdInfo = ({ data }) => {
             maxW='420px'
             noOfLines={4}
           >
-            hay {data?.stock} unidades disponibles
+            hay {product?.stock} unidades disponibles
           </Text>
 
           <Flex gap={1}>
@@ -60,32 +60,11 @@ export const DetailProductCArdInfo = ({ data }) => {
               Precio:
             </Text>
             <Text>
-              {data?.price?.toLocaleString('de', { style: "currency", currency: "COP" })}
+              {product?.price?.toLocaleString('de', { style: "currency", currency: "COP" })}
             </Text>
           </Flex>
 
-          <Formik initialValues={{ count: 1 }}>
-            {({ values, setFieldValue }) => (
-              <Form>
-                <Grid position='relative' marginY={4} gap={2}>
-                  <ComponetInputFormik
-                    required
-                    maxW='30px'
-                    name='count'
-                    type='number'
-                    label='Cantidad'
-                  />
-                  <Grid left='68px' top={6} position='absolute' gap={1}>
-                    <Button variant='link' size='md' onClick={() => setFieldValue('count', values.count + 1)}>+</Button>
-                    <Button variant='link' size='md' onClick={() => setFieldValue('count', values.count - 1)}>-</Button>
-                  </Grid>
-                  <Button alignSelf='end' >
-                    Agregar al carrito
-                  </Button>
-                </Grid>
-              </Form>
-            )}
-          </Formik>
+          <DetailProductCardInfoForm product={product} />
 
         </Grid>
 

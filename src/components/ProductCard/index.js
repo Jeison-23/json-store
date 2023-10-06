@@ -51,7 +51,7 @@ export const ProductCard = (props) => {
         <Text textTransform='uppercase' as='b' fontSize='2xl' >{name}</Text>
         <Grid gap={2} templateColumns='1fr'>
           <Text>precio: ${price}</Text>
-          <Text>stock: {price}</Text>
+          <Text>stock: {stock}</Text>
           <Text>categoria: {category?.name}</Text>
         </Grid>
       </Grid>

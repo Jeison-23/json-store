@@ -1,9 +1,14 @@
-import React from 'react'
-import { Box, Grid, Img, Text } from '@chakra-ui/react'
+import React, { useContext, useState } from 'react'
+import { Box, Grid, Icon, Img, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
+import { ShoppingCartContext } from '@/context/ShoppingCartContext'
+import { BsCart, BsCartX } from 'react-icons/bs'
 
 export const ProductCard = (props) => {
   const router = useRouter()
+  const [hoverCart, setHoverCart] = useState(false)
+  const { findProduct, removeProduct, addProduct } = useContext(ShoppingCartContext)
+
   const {
     _id,
     stock = 0,
@@ -11,11 +16,42 @@ export const ProductCard = (props) => {
     images = [],
     name = 'name',
     category = { name: 'category' },
-    noDetail
+    noDetail,
+    addCart = false
   } = props
 
+  const shoppingCartHandler = () => {
+    const product = { ...props }
+    delete product.noDetail
+    product.quantity = 1
+    !findProduct(_id) ? addProduct(product) : removeProduct(_id)
+
+  }
+
   return (
-    <Grid bg='#FFFFFF' opacity='0.8' p={2.5} borderWidth='1px' gap={2} _hover={{ filter: 'brightness(95%)'}}>
+    <Grid
+      p={2.5}
+      gap={2}
+      bg='#FFFFFF'
+      opacity='0.8'
+      borderWidth='1px'
+      position='relative'
+      _hover={{ filter: 'brightness(95%)' }}
+      onMouseEnter={() => addCart && setHoverCart(true)}
+      onMouseLeave={() => addCart && setHoverCart(false)}
+    >
+      {addCart && hoverCart && (
+        <Icon
+          top={1}
+          right={1}
+          bg='#FFFFFF'
+          color='#000000'
+          cursor='pointer'
+          position='absolute'
+          onClick={shoppingCartHandler}
+          as={findProduct(_id) ? BsCartX : BsCart}
+        />
+      )}
       <Grid
         onClick={() => {
           if (!noDetail) {
@@ -49,10 +85,10 @@ export const ProductCard = (props) => {
 
       <Grid color='#000000' bg='#FFFFFF' >
         <Text textTransform='uppercase' as='b' fontSize='2xl' >{name}</Text>
-        <Grid gap={2} templateColumns='1fr'>
-          <Text>precio: ${price}</Text>
-          <Text>stock: {stock}</Text>
-          <Text>categoria: {category?.name}</Text>
+        <Grid>
+          <Text>Precio: {price.toLocaleString('es',{style: 'currency', currency: 'COP'})}</Text>
+          <Text>Stock: {stock.toLocaleString('de')}</Text>
+          <Text>Categoria: {category?.name}</Text>
         </Grid>
       </Grid>
     </Grid>

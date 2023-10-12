@@ -14,7 +14,7 @@ export const AdminProductContainer = () => {
     refreshProducts,
     productData,
     productLoading,
-    setshowPreview,
+    showPreview,
   } = useAdminProductContainer()
 
   return (
@@ -26,7 +26,7 @@ export const AdminProductContainer = () => {
         productLoading={productLoading}
         productForm={productForm}
         categoryData={categoryData}
-        setshowPreview={setshowPreview}
+        showPreview={showPreview}
       />
     </Grid>
   )

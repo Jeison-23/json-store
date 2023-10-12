@@ -13,10 +13,9 @@ const ShoppingCartContextProvider = ({children}) => {
   const count = () => productsSelected.length
 
   const countAll = () => {
-    if (count()) {
-      return productsSelected.reduce((acc, curr) => acc + curr.quantity, 0)
+    if (count()) return productsSelected.reduce((acc, curr) => acc + curr.quantity, 0)
 
-    } else return count()
+    else return count()
 
   }
 
@@ -28,6 +27,22 @@ const ShoppingCartContextProvider = ({children}) => {
     } else return count()
   }
 
+  const findProduct = (productId) => {
+    let found = productsSelected.filter(product => product._id === productId )
+    return found.length > 0
+    
+  }
+
+  const addProduct = (product) => {
+    setProductsSelected(state => state.concat(product))
+  }
+
+  const removeProduct = (productId) => {
+    const updateArray = productsSelected.filter(product =>  product._id !== productId)
+    setProductsSelected(updateArray)
+
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -35,6 +50,9 @@ const ShoppingCartContextProvider = ({children}) => {
         countAll: countAll(),
         priceTotal: priceTotal(),
         clearCart,
+        addProduct,
+        findProduct,
+        removeProduct,
         productsSelected,
         setProductsSelected,
       }}

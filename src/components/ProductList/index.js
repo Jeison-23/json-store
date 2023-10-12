@@ -4,7 +4,7 @@ import { ProductCard } from '../ProductCard'
 import { ProductCardLoader } from '../ProductCard/loader'
 
 export const ProductList = (props) => {
-  const { data = [], loading, noDetail = false } = props
+  const { data = [], loading, noDetail = false, addCart = false } = props
 
   return (
     <Grid>
@@ -19,6 +19,7 @@ export const ProductList = (props) => {
               {data.map((item, i) => (
                 <ProductCard
                   key={i}
+                  addCart={addCart}
                   noDetail={noDetail}
                   {...item}
                 />

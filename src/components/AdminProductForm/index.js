@@ -79,6 +79,7 @@ export const AdminProductForm = (props) => {
                 colorScheme='red'
                 variant='outline'
                 isLoading={loading}
+                onClick={() => productForm.onClose()}
               >
                 Cancelar
               </Button>

@@ -20,7 +20,7 @@ export const PayList = () => {
         overflow='auto'
         overflowX='hidden'
       >
-        <ShopingCartProducts />
+        <ShopingCartProducts payPage />
       </Box>
       <Grid p={2} borderWidth='1px' templateColumns='1fr auto'>
         <Text> Cantidad total de Productos </Text>

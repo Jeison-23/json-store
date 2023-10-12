@@ -15,7 +15,7 @@ export const AdminProductList = (props) => {
     productData,
     productLoading,
     refreshProducts,
-    setshowPreview,
+    showPreview,
   } = props
 
   const {
@@ -30,7 +30,7 @@ export const AdminProductList = (props) => {
 
   return (
     <Grid>
-      {setshowPreview ?
+      {showPreview ?
         <ComponentTable
           tableHead={header}
           loading={productLoading}

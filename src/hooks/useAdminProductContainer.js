@@ -6,7 +6,7 @@ import { useDisclosure } from '@chakra-ui/react'
 
 export const useAdminProductContainer = () => {
   const productForm = useDisclosure()
-  const [setshowPreview, setShowPreview] = useState(false)
+  const [showPreview, setShowPreview] = useState(true)
   const [getProducts, { data: productData, loading: productLoading, error: productError }] = useLazyQuery(Product)
 
   const refreshProducts = (filter = {}) => {
@@ -26,8 +26,8 @@ export const useAdminProductContainer = () => {
       handleAction: () => refreshProducts(),
     },
     {
-      label: setshowPreview ? 'Visualisar' : 'Lista',
-      handleAction: () => setShowPreview(state => !state),
+      label: showPreview ? 'Visualisar' : 'Lista',
+      handleAction: () => setShowPreview(!showPreview),
     },
   ]
 
@@ -47,6 +47,6 @@ export const useAdminProductContainer = () => {
     refreshProducts,
     productData,
     productLoading,
-    setshowPreview,
+    showPreview,
   }
 }

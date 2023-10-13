@@ -1,9 +1,9 @@
 import React from 'react'
-import { ProductContainerDetail } from '@/containers/ProductContainerDetail'
+import { ProductDetailContainer } from '@/containers/ProductDetailContainer'
 
 const Product = ({params}) => {
   return (
-    <ProductContainerDetail productId={params.id} />
+    <ProductDetailContainer productId={params.id} />
   )
 }
 

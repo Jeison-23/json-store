@@ -12,7 +12,7 @@ export const Layouts = ({ children}) => {
 
     switch (true) {
       case path.includes('/admin/'):
-        element = <NavbarAdminLayout children={children} /> 
+        element = <NavbarAdminLayout path={path} children={children} /> 
         break;
 
       default:

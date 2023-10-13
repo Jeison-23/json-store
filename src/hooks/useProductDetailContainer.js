@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Product } from '@/graphql/products'
 import { useLazyQuery } from '@apollo/client'
 
-export const useProductContainerDetail = (productId) => {
+export const useProductDetailContainer = (productId) => {
   const [showImagesActions, setShowImagesActions] = useState(false)
   const [imagesPos, setImagesPos] = useState(0)
   const [getProducts, { loading, error, data }] = useLazyQuery(Product)

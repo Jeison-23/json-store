@@ -4,7 +4,7 @@ import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { Box, Flex, Grid, Icon, Text } from '@chakra-ui/react'
 
-export const NavbarAdminLayout = ({ children }) => {
+export const NavbarAdminLayout = ({ children, path }) => {
 
   return (
     <Box>
@@ -12,7 +12,7 @@ export const NavbarAdminLayout = ({ children }) => {
         p={4}
         gap={4}
         bg='#000000'
-        color='#E3E0FB'
+        color='#FFFFFF'
         templateColumns='1fr 1fr 1fr'
       >
         <Flex justifyContent='start'>
@@ -39,12 +39,12 @@ export const NavbarAdminLayout = ({ children }) => {
           p={2}
           gap={2}
           alignItems='center'
+          justifyContent='space-between'
         >
           <Link href='/admin/posts'>
           <Text
-            as='b'
+            as={path === '/admin/posts' && 'b'}
             cursor='pointer'
-            fontSize='2xl'
           >
             Administración
           </Text>
@@ -52,8 +52,8 @@ export const NavbarAdminLayout = ({ children }) => {
 
           <Link href='/admin/products'>
           <Text
+            as={path === '/admin/products' && 'b'}
             cursor='pointer'
-            _hover={{}}
           >
             Productos
           </Text>
@@ -61,6 +61,7 @@ export const NavbarAdminLayout = ({ children }) => {
 
           <Link href='/admin/categories'>
             <Text
+              as={path === '/admin/categories' && 'b'}
               cursor='pointer'
             >
               Categorias
@@ -69,6 +70,7 @@ export const NavbarAdminLayout = ({ children }) => {
 
           <Link href='/admin/roles'>
             <Text
+              as={path === '/admin/roles' && 'b'}
               cursor='pointer'
             >
               Roles
@@ -77,6 +79,7 @@ export const NavbarAdminLayout = ({ children }) => {
 
           <Link href='/admin/users'>
           <Text
+            as={path === '/admin/users' && 'b'}
             cursor='pointer'
           >
             Usuarios

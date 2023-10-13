@@ -2,9 +2,9 @@
 import React from 'react'
 import { Grid,} from '@chakra-ui/react'
 import { DetailProductCard } from '@/components/DetailProductCard'
-import { useProductContainerDetail } from '@/hooks/useProductContainerDetail'
+import { useProductDetailContainer } from '@/hooks/useProductDetailContainer'
 
-export const ProductContainerDetail = ({ productId }) => {
+export const ProductDetailContainer = ({ productId }) => {
   const {
     data,
     loading,
@@ -13,7 +13,7 @@ export const ProductContainerDetail = ({ productId }) => {
     nextImage,
     showImagesActions,
     setShowImagesActions
-  } = useProductContainerDetail(productId)
+  } = useProductDetailContainer(productId)
 
   return (
     <Grid m={4} justifyContent='center' >

@@ -17,7 +17,7 @@ export const NavbarMainLayout = ({ path, children }) => {
         p={4}
         gap={4}
         bg='#000000'
-        color='#E3E0FB'
+        color='#FFFFFF'
         templateColumns='auto 1fr 1fr'
       >
         <Flex justifyContent='start'>
@@ -28,6 +28,7 @@ export const NavbarMainLayout = ({ path, children }) => {
               cursor='pointer'
               alignItems='center'
               borderRadius='10px'
+              textShadow={path === '/home-page' && '0px 0px 8px #CC6BEE, 0px 0px 8px #CC6BEE '}
             >
               <Icon as={AiOutlineAppstoreAdd} boxSize={7} />
               <Text
@@ -44,14 +45,13 @@ export const NavbarMainLayout = ({ path, children }) => {
           p={2}
           gap={2}
           alignItems='center'
+          justifyContent='space-between'
         >
           <Link href='/products'>
             <Text
               cursor='pointer'
               as={path === '/products' && 'b'}
               alignSelf='end'
-              textTransform={path === '/products' && 'uppercase'}
-              // fontSize={path === '/products' && 'lg'}
               textShadow={path === '/products' && '0px 0px 8px #CC6BEE, 0px 0px 8px #CC6BEE '}
             >
               Productos
@@ -79,7 +79,6 @@ export const NavbarMainLayout = ({ path, children }) => {
             <Text
               as={path === '/login' && 'b'}
               textShadow={path === '/login' && '0px 0px 8px #CC6BEE'}
-              textTransform={path === '/login' && 'uppercase'}
               cursor='pointer'
             >
               login

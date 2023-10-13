@@ -42,7 +42,7 @@ export const ProductContainer = () => {
                 dataCategory={dataCategory?.category}
                 refreshProducts={refreshProducts}
               />
-              <ProductList loading={loading} data={data?.product} />
+              <ProductList addCart loading={loading} data={data?.product} />
             </Grid>
           </Grid>
         </Form>

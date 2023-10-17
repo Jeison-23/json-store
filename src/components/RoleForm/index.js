@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Formik } from 'formik'
-import { Button, Grid } from '@chakra-ui/react'
+import { SelectCard } from '../SelectCard'
 import { useRoleForm } from '@/hooks/useRoleForm'
+import { accessAdmin } from '@/constants/accessKeys'
+import { Button, Grid, GridItem } from '@chakra-ui/react'
 import { ComponetInputFormik } from '@/common/ComponetInputFormik'
 
 export const RoleForm = (props) => {
@@ -34,14 +36,18 @@ export const RoleForm = (props) => {
                 required
                 isDisabled={roleSelected?.key}
               />
+              <GridItem colSpan={2} >
+                <SelectCard name='accessKeys' data={accessAdmin} label='Selecciona los accesos para este rol' />
+              </GridItem>
             </Grid>
+            
             <Button
-            isLoading={loading}
+              size='sm'
               type='submit'
               variant='outline'
               colorScheme='green'
+              isLoading={loading}
               justifySelf='flex-end'
-              
             >
               Aceptar
             </Button>

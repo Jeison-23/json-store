@@ -11,7 +11,8 @@ export const useRoleForm = (props) => {
   const initialValues = {
     _id: null,
     rol: '',
-    key: ''
+    key: '',
+    accessKeys: []
   }
 
   const validate = (values) => {

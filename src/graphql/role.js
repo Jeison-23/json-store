@@ -7,6 +7,7 @@ export const Role = gql`
       _id
       key
       rol
+      accessKeys
     }
   }
 `;

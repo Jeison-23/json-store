@@ -10,13 +10,13 @@ export const Providers = ({ children }) => {
 
   return (
     <CacheProvider>
+      <ApolloProvider client={client} >
       <ChakraProvider theme={theme}>
-        <ApolloProvider client={client} >
           <ShoppingCartContextProvider>
             {children}
           </ShoppingCartContextProvider>
-        </ApolloProvider>
       </ChakraProvider>
+    </ApolloProvider>
     </CacheProvider>
   )
 }

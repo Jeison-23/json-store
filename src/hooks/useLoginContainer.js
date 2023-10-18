@@ -47,9 +47,8 @@ export const useLoginContainer = () => {
       if (error) {
         alertToast({ title: 'Error', description: 'Usuario o contraseña no valido', status: 'error', position: 'top' })
         console.log(error.message);
-      } else {
-        console.log('data')
-       // localStorage.setItem('session-token', JSON.stringify(values))
+      } else if (data.login) {
+        localStorage.setItem('session-token', JSON.stringify(data.login))
       }
     }
   }, [data, error])

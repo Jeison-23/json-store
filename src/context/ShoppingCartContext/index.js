@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createContext, useState } from 'react' 
 export const ShoppingCartContext = createContext()
 
@@ -43,6 +43,19 @@ const ShoppingCartContextProvider = ({children}) => {
 
   }
 
+  useEffect(() => {
+    const shoppingCartStorage = localStorage.getItem('shoppingCart')
+    if (shoppingCartStorage.length) {
+      setProductsSelected(JSON.parse(shoppingCartStorage))
+    }
+
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('shoppingCart',JSON.stringify(productsSelected))
+    
+  }, [productsSelected])
+  
   return (
     <ShoppingCartContext.Provider
       value={{

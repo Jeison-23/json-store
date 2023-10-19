@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { Login } from "@/graphql/login"
+import { useRouter } from "next/navigation"
+import { useLazyQuery } from "@apollo/client"
 import { messages } from "@/constants/messages"
 import { useGeneralFunction } from "./useGeneralFunction"
-import { useLazyQuery } from "@apollo/client"
-import { Login } from "@/graphql/login"
 
 export const useLoginContainer = () => {
+  const router = useRouter()
   const { validateEmail, alertToast } = useGeneralFunction()
   const [firstRender, setFirstRender] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
@@ -49,6 +51,7 @@ export const useLoginContainer = () => {
         console.log(error.message);
       } else if (data.login) {
         localStorage.setItem('session-token', JSON.stringify(data.login))
+        router.replace(`/profile/${data.login}`)
       }
     }
   }, [data, error])

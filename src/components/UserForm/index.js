@@ -8,6 +8,7 @@ import { ComponentSelectFormik } from '@/common/ComponentSelectFormik'
 
 export const UserForm = (props) => {
   const {
+    noRole = false,
     userSelected,
     loadingRole,
     errorRole,
@@ -46,14 +47,15 @@ export const UserForm = (props) => {
                 </Grid>
 
                 <Grid gap={2}>
-                  <ComponentSelectFormik
-                    label='Selecciona el rol'
-                    data={dataRole?.role}
-                    valueField='_id'
-                    labelField='rol'
-                    required
-                    name='roleId'
-                  />
+                  {!noRole &&
+                    <ComponentSelectFormik
+                      label='Selecciona el rol'
+                      data={dataRole?.role}
+                      valueField='_id'
+                      labelField='rol'
+                      required
+                      name='roleId'
+                    />}
                   <ComponetInputFormik
                     label='correo'
                     required

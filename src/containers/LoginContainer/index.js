@@ -102,11 +102,11 @@ export const LoginContainer = () => {
 
                   <Button
                     bg='white'
-                    _hover={{bg: 'white.600'}}
                     color='black'
                     type='submit'
                     isLoading={loading}
                     fontFamily='fantasy'
+                    _hover={{bg: 'white.600'}}
                   >
                     Aceptar
                   </Button>

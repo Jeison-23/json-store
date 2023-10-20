@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { Box, Flex, Grid, Icon, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import { useLazyQuery } from '@apollo/client'
+import { Session } from '@/graphql/session'
+import { FaUser } from 'react-icons/fa'
 
 export const NavbarAdminLayout = ({ children, path }) => {
+  const router = useRouter()
+  const [accessKeys, setAccessKeys] = useState([])
+  const [token, setToken] = useState('')
+  const [getSession, { data, loading, error }] = useLazyQuery(Session)
+
+  const getAccess = (tok) => {
+    getSession({
+      variables: { filter: { _id: tok } },
+      fetchPolicy: 'network-only'
+    })
+  }
+
+  useEffect(() => {
+    const localToken = localStorage.getItem('session-token')
+    if (JSON.parse(localToken)) {
+      setToken(JSON.parse(localToken))
+      !accessKeys.length && getAccess(JSON.parse(localToken))
+
+    } else {
+      router.replace('/login')
+
+    }
+
+  }, [path])
+
+  useEffect(() => {
+    if (data?.session) {
+      setAccessKeys(data?.session[0]?.role?.accessKeys)
+    }
+
+  }, [data])
 
   return (
     <Box>
@@ -41,60 +76,73 @@ export const NavbarAdminLayout = ({ children, path }) => {
           alignItems='center'
           justifyContent='space-between'
         >
-          <Link href='/admin/posts'>
-          <Text
-            as={path === '/admin/posts' && 'b'}
-            cursor='pointer'
-          >
-            Administración
-          </Text>
-          </Link>
+          {accessKeys.includes('administración') &&
+            <Link href='/admin/posts'>
+              <Text
+                as={path === '/admin/posts' && 'b'}
+                cursor='pointer'
+              >
+                Administración
+              </Text>
+            </Link>}
 
-          <Link href='/admin/products'>
-          <Text
-            as={path === '/admin/products' && 'b'}
-            cursor='pointer'
-          >
-            Productos
-          </Text>
-          </Link>
+          {accessKeys.includes('productos') &&
+            <Link href='/admin/products'>
+              <Text
+                as={path === '/admin/products' && 'b'}
+                cursor='pointer'
+              >
+                Productos
+              </Text>
+            </Link>}
 
-          <Link href='/admin/categories'>
-            <Text
-              as={path === '/admin/categories' && 'b'}
-              cursor='pointer'
-            >
-              Categorias
-            </Text>
-          </Link>
+          {accessKeys.includes('categorias') &&
+            <Link href='/admin/categories'>
+              <Text
+                as={path === '/admin/categories' && 'b'}
+                cursor='pointer'
+              >
+                Categorias
+              </Text>
+            </Link>}
 
-          <Link href='/admin/roles'>
-            <Text
-              as={path === '/admin/roles' && 'b'}
-              cursor='pointer'
-            >
-              Roles
-            </Text>
-          </Link>
+          {accessKeys.includes('roles') &&
+            <Link href='/admin/roles'>
+              <Text
+                as={path === '/admin/roles' && 'b'}
+                cursor='pointer'
+              >
+                Roles
+              </Text>
+            </Link>}
 
-          <Link href='/admin/users'>
-          <Text
-            as={path === '/admin/users' && 'b'}
-            cursor='pointer'
-          >
-            Usuarios
-          </Text>
-          </Link>
+          {accessKeys.includes('usuarios') &&
+            <Link href='/admin/users'>
+              <Text
+                as={path === '/admin/users' && 'b'}
+                cursor='pointer'
+              >
+                Usuarios
+              </Text>
+            </Link>}
 
         </Flex>
 
         <Flex
-          gap={2}
+          gap={4}
           alignItems='center'
           justifyContent='flex-end'
         >
           <ThemeSwitcher />
-          Opciones de usuarios
+          <Link href={`/admin/profile/${token}`}>
+            <Icon
+              boxSize={6}
+              as={FaUser}
+              borderWidth={1}
+              borderRadius='100%'
+              bg={path === `/admin/profile/${token}` && '#CC6BEE'}
+            />
+          </Link>
         </Flex>
       </Grid>
 

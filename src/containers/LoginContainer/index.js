@@ -12,6 +12,7 @@ export const LoginContainer = () => {
     loading,
     onSubmit,
     validate,
+    localLoading,
     showPassword,
     initialValues,
     setShowPassword,
@@ -94,7 +95,7 @@ export const LoginContainer = () => {
                 <Flex gap={2} alignItems='center' justifyContent='flex-end' >
                   <Button
                     type='reset'
-                    isLoading={loading}
+                    isLoading={localLoading}
                     fontFamily='fantasy'
                   >
                     cancelar
@@ -104,7 +105,7 @@ export const LoginContainer = () => {
                     bg='white'
                     color='black'
                     type='submit'
-                    isLoading={loading}
+                    isLoading={localLoading}
                     fontFamily='fantasy'
                     _hover={{bg: 'white.600'}}
                   >

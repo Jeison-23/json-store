@@ -8,9 +8,9 @@ import { useGeneralFunction } from "./useGeneralFunction"
 export const useLoginContainer = () => {
   const router = useRouter()
   const { validateEmail, alertToast } = useGeneralFunction()
+  const [localLoading, setLocalLoading] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-
   const [login, { data, loading, error }] = useLazyQuery(Login)
 
   const validateLogin = (input) => {
@@ -35,6 +35,7 @@ export const useLoginContainer = () => {
   }
 
   const onSubmit = async (values) => {
+    setLocalLoading(true)
     try {
       await validateLogin(values)
     } catch (e) {
@@ -47,11 +48,15 @@ export const useLoginContainer = () => {
       setFirstRender(false)
     } else {
       if (error) {
+        setLocalLoading(false)
         alertToast({ title: 'Error', description: 'Usuario o contraseña no valido', status: 'error', position: 'top' })
-        console.log(error.message);
-      } else if (data.login) {
+        console.log(error.message)
+
+      } else if (data?.login) {
+        alertToast({ title: 'Correcto', description: 'Hola, bienvenido has ingresado de manera correcta!', status: 'success', position: 'top' })
         localStorage.setItem('session-token', JSON.stringify(data.login))
         router.replace(`/profile/${data.login}`)
+
       }
     }
   }, [data, error])
@@ -60,6 +65,7 @@ export const useLoginContainer = () => {
     loading,
     onSubmit,
     validate,
+    localLoading,
     showPassword,
     initialValues,
     setShowPassword,

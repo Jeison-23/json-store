@@ -14,6 +14,7 @@ export const User = gql`
       role {
         _id
         rol
+        accessKeys
       }
     }
   }

@@ -1,24 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { FaUser } from 'react-icons/fa'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { ComponentDrawer } from '@/common/ComponentDrawer'
 import { ShopingCartProducts } from '@/components/ShopingCartProducts'
 import { AiOutlineAppstoreAdd, AiOutlineShoppingCart } from 'react-icons/ai'
-import { Box, Flex, Grid, Icon, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react'
 import { ShopingcartProductsCount } from '@/components/ShopingcartProductsCount'
 import { ShopingCartProductsFooter } from '@/components/ShopingCartProductsFooter'
 
 export const NavbarMainLayout = ({ path, children }) => {
   const shopingCartDrawer = useDisclosure()
+  const [token, setToken] = useState('')
+  const [isLogged, setIsLogged] = useState(false)
+  
+  useEffect(() => {
+    const localToken = localStorage.getItem('session-token')
+    const state = JSON.parse(localToken) ? true : false
+    setToken(JSON.parse(localToken))
+    setIsLogged(state)
 
+  }, [path])
+  
   return (
     <Box>
-      <Grid
+      <Flex
         p={4}
         gap={4}
         bg='#000000'
         color='#FFFFFF'
-        templateColumns='auto 1fr 1fr'
+        justifyContent='space-between'
       >
         <Flex justifyContent='start'>
           <Link href='/home-page'>
@@ -43,6 +54,7 @@ export const NavbarMainLayout = ({ path, children }) => {
 
         <Flex
           p={2}
+          w='40%'
           gap={2}
           alignItems='center'
           justifyContent='space-between'
@@ -57,6 +69,18 @@ export const NavbarMainLayout = ({ path, children }) => {
               Productos
             </Text>
           </Link>
+          
+          {isLogged ?
+            <Text>
+              Favoritos
+            </Text>
+            : undefined}
+
+          {isLogged ?
+            <Text>
+              Facturas
+            </Text>
+            : undefined}
         </Flex>
 
         <Flex
@@ -75,17 +99,29 @@ export const NavbarMainLayout = ({ path, children }) => {
               as={AiOutlineShoppingCart}
             />
           </Flex>
-          <Link href='/login'>
-            <Text
-              as={path === '/login' && 'b'}
-              textShadow={path === '/login' && '0px 0px 8px #CC6BEE'}
-              cursor='pointer'
-            >
-              login
-            </Text>
-          </Link>
+          {!isLogged ?
+            <Link href='/login'>
+              <Text
+                as={path === '/login' && 'b'}
+                textShadow={path === '/login' && '0px 0px 8px #CC6BEE'}
+                cursor='pointer'
+              >
+                login
+              </Text>
+            </Link>
+            :
+            <Link href={`/profile/${token}`}>
+              <Icon
+                boxSize={5}
+                as={FaUser}
+                borderWidth={1}
+                borderRadius='100%'
+                bg={path === `/profile/${token}` && '#CC6BEE'}
+              />
+            </Link>
+          }
         </Flex>
-      </Grid>
+      </Flex>
 
       <Box
         overflowY='auto'

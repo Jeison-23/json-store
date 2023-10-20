@@ -3,7 +3,7 @@ import { ProfileContainer } from "@/containers/ProfileContainer"
 
 const Profile = ({ params }) => {
   return (
-    <ProfileContainer token={params.token} />
+    <ProfileContainer isAdmin token={params.token} />
   )
 }
 

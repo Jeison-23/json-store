@@ -9,7 +9,7 @@ export const useProfileContainer = ({ token }) => {
   const router = useRouter()
   const modalUserForm = useDisclosure()
   const [redirect, setRedirect] = useState(true)
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [adminAccess, setAdminAccess] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
   const [userSelected, setUserSelected] = useState({})
   const [localLoading, setLocalLoading] = useState(true)
@@ -34,11 +34,15 @@ export const useProfileContainer = ({ token }) => {
     })
   }
 
-  const refreshGetUser = (filter = { _id: data?.session[0]?.userId }) => {
-    getUser({
-      variables: { filter },
-      fetchPolicy: 'network-only'
-    })
+  const refreshGetUser = (filter = { _id: data?.session[0]?.userId}) => {
+    if (filter._id) {
+      getUser({
+        variables: { filter },
+        fetchPolicy: 'network-only'
+      })
+    } else {
+      closeSession()
+    }
   }
 
   useEffect(() => refresh({ _id: token }), [])
@@ -57,25 +61,32 @@ export const useProfileContainer = ({ token }) => {
       setLocalLoading(false)
       if (dataUser?.user[0]) {
         setUserSelected(dataUser?.user[0])
-        setIsAdmin(dataUser?.user[0]?.role?.accessKeys?.length > 0)
+        setAdminAccess(dataUser?.user[0]?.role?.accessKeys?.length > 0)
       }
 
     }
   }, [dataUser])
 
-  const nameMain = (user) => {
-    const lastN = user?.lastName.split(' ')
-    const firstN = user?.firstName.split(' ')
-    
-    return `${firstN[0]} ${lastN[0]}`
+  const nameMain = (user = {}) => {
+    if (user._id) {
+      const lastN = user?.lastName?.split(' ')
+      const firstN = user?.firstName?.split(' ')
 
+      return `${firstN[0] || ''} ${lastN[0] || ''}`
+    }
+
+    return '----- ------'
   }
 
-  const hiddenId = (user) => {
-    let res = user?.id?.toString()
-    const hidden = res.slice(-3)
+  const hiddenId = (user = {}) => {
+    if (user._id) {
+      let res = user?.id?.toString()
+      const hidden = res.slice(-3)
 
-    return hidden.padStart(res.length, '*')
+      return hidden.padStart(res.length, '*')
+    }
+
+    return '**********'
   }
 
   const closeSession = () => {
@@ -91,7 +102,7 @@ export const useProfileContainer = ({ token }) => {
     router,
     refresh,
     loading,
-    isAdmin,
+    adminAccess,
     nameMain,
     hiddenId,
     redirect,

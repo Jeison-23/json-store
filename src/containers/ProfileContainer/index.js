@@ -7,11 +7,12 @@ import { useProfileContainer } from '@/hooks/useProfileContainer'
 import { Button, Flex, Grid, Image, Text } from '@chakra-ui/react'
 
 export const ProfileContainer = (props) => {
+  const { isAdmin = false } = props
   const {
     data,
     error,
     router,
-    isAdmin,
+    adminAccess,
     nameMain,
     hiddenId,
     redirect,
@@ -49,7 +50,7 @@ export const ProfileContainer = (props) => {
               <Flex gap={2}>
                 <Button  borderRadius={0} onClick={()=> closeSession()} colorScheme='red' > logout </Button>
                 <Button borderRadius={0} onClick={modalUserForm.onOpen} >Editar</Button>
-                {isAdmin && <Button borderRadius={0} onClick={()=> router.replace('/admin/home') } > Admin </Button>}
+                {adminAccess && <Button borderRadius={0} onClick={()=> router.replace(isAdmin ? '/home-page' :'/admin/home') } > {isAdmin ? 'User' : 'Admin'} </Button>}
               </Flex>
             </Flex>
 

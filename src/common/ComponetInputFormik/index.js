@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'formik'
-import { Box, Flex, Grid, Input, Text, Textarea } from '@chakra-ui/react'
+import { Box, Flex, Grid, Input, InputGroup, Text, Textarea } from '@chakra-ui/react'
 
 export const ComponetInputFormik = (props) => {
   const {
@@ -8,11 +8,14 @@ export const ComponetInputFormik = (props) => {
     label = '',
     size = 'md',
     type = "text",
+    fontSize = '',
     labelSize = '',
     required= false,
-    variant = 'outline',
     placeholder = '',
     isDisabled = false,
+    variant = 'outline',
+    inputTextAlign = '',
+    inputTextTransform = '',
     onChangeInput = () => { },
     ...rest
   } = props
@@ -24,8 +27,8 @@ export const ComponetInputFormik = (props) => {
         field, // { name, value, onChange, onBlur }
         form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
         meta }) => (
-        <Grid gap={1}>
-          <Flex gap={1}>
+        <Box>
+          <Flex gap={1} mb={2}>
             <Text fontSize={labelSize}>{label}</Text>
             <Text fontSize={labelSize} color='tomato'>{`${required ? '*' : ''}`}</Text>
           </Flex>
@@ -36,8 +39,11 @@ export const ComponetInputFormik = (props) => {
                 type={type}
                 size={size}
                 variant={variant}
+                fontSize={fontSize}
                 isDisabled={isDisabled}
                 placeholder={placeholder}
+                textAlign={inputTextAlign}
+                textTransform={inputTextTransform}
                 onChange={(v) => {
                   field.onChange(v)
                   onChangeInput(v.target.value)
@@ -55,9 +61,9 @@ export const ComponetInputFormik = (props) => {
               />
           }
           {meta.touched && meta.error && (
-            <Text fontSize='xs' color='tomato' className="error">{meta.error}</Text>
+            <Text mt={1} fontSize='xs' color='tomato' className="error">{meta.error}</Text>
           )}
-        </Grid>
+        </Box>
       )}
     </Field>
     </Grid>

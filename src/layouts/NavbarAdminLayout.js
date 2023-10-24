@@ -76,7 +76,7 @@ export const NavbarAdminLayout = ({ children, path }) => {
           alignItems='center'
           justifyContent='space-between'
         >
-          {accessKeys.includes('administración') &&
+          {accessKeys?.includes('administración') &&
             <Link href='/admin/posts'>
               <Text
                 as={path === '/admin/posts' && 'b'}
@@ -86,7 +86,7 @@ export const NavbarAdminLayout = ({ children, path }) => {
               </Text>
             </Link>}
 
-          {accessKeys.includes('productos') &&
+          {accessKeys?.includes('productos') &&
             <Link href='/admin/products'>
               <Text
                 as={path === '/admin/products' && 'b'}
@@ -96,7 +96,7 @@ export const NavbarAdminLayout = ({ children, path }) => {
               </Text>
             </Link>}
 
-          {accessKeys.includes('categorias') &&
+          {accessKeys?.includes('categorias') &&
             <Link href='/admin/categories'>
               <Text
                 as={path === '/admin/categories' && 'b'}
@@ -106,7 +106,7 @@ export const NavbarAdminLayout = ({ children, path }) => {
               </Text>
             </Link>}
 
-          {accessKeys.includes('roles') &&
+          {accessKeys?.includes('roles') &&
             <Link href='/admin/roles'>
               <Text
                 as={path === '/admin/roles' && 'b'}
@@ -116,7 +116,7 @@ export const NavbarAdminLayout = ({ children, path }) => {
               </Text>
             </Link>}
 
-          {accessKeys.includes('usuarios') &&
+          {accessKeys?.includes('usuarios') &&
             <Link href='/admin/users'>
               <Text
                 as={path === '/admin/users' && 'b'}

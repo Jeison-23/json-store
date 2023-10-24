@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
-import { Box, Button, Flex, Grid, Text } from '@chakra-ui/react'
 import { ShopingCartProducts } from '../ShopingCartProducts'
 import { ShoppingCartContext } from '@/context/ShoppingCartContext'
+import { Box, Button, Grid, Text, useDisclosure } from '@chakra-ui/react'
+import { ComponentModal } from '@/common/ComponentModal'
+import { PayForm } from '../PayForm'
 
 export const PayList = () => {
-
+  const payForm = useDisclosure()
   const { count, countAll, priceTotal } = useContext(ShoppingCartContext)
 
   return (
@@ -27,7 +29,7 @@ export const PayList = () => {
         <Text justifySelf='end'>
           {countAll.toLocaleString('de')}
         </Text>
-        
+
         {/* <Text> descuento total </Text>
         <Text justifySelf='end'> 6,500.00 </Text> */}
 
@@ -36,9 +38,20 @@ export const PayList = () => {
           {priceTotal.toLocaleString('en',{style:'currency', currency: 'COP'})}
         </Text>
       </Grid>
-      <Button justifySelf='flex-end' colorScheme='green' >
+
+      <Button justifySelf='flex-end' colorScheme='green' onClick={payForm.onOpen} >
         pagar
       </Button>
+
+      <ComponentModal
+        size='2xl'
+        title='Formulario de Pago'
+        body={
+          <PayForm />
+        }
+        isOpen={payForm.isOpen}
+        onClose={payForm.onClose}
+      />
     </Grid>
   )
 }

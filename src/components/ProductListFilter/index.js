@@ -27,6 +27,7 @@ export const ProductListFilter = ({ refreshProducts }) => {
           <Button
             size='xs'
             type='reset'
+            borderRadius={0}
             variant='outline'
             colorScheme='orange'
             onClick={() => refreshProducts()}
@@ -37,6 +38,7 @@ export const ProductListFilter = ({ refreshProducts }) => {
           <Button
             size='xs'
             type='submit'
+            borderRadius={0}
             variant='outline'
             colorScheme='purple'
           >

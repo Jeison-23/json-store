@@ -11,18 +11,20 @@ export const ProductCard = (props) => {
 
   const {
     _id,
+    noDetail,
     stock = 0,
     price = 0,
     images = [],
     name = 'name',
-    category = { name: 'category' },
-    noDetail,
-    addCart = false
+    addCart = false,
+    category = { name: 'category' }
   } = props
 
   const shoppingCartHandler = () => {
     const product = { ...props }
+    delete product.addCart
     delete product.noDetail
+    delete product.__typename
     product.quantity = 1
     !findProduct(_id) ? addProduct(product) : removeProduct(_id)
 

@@ -45,7 +45,7 @@ const ShoppingCartContextProvider = ({children}) => {
 
   useEffect(() => {
     const shoppingCartStorage = localStorage.getItem('shoppingCart')
-    if (shoppingCartStorage.length) {
+    if (shoppingCartStorage?.length) {
       setProductsSelected(JSON.parse(shoppingCartStorage))
     }
 

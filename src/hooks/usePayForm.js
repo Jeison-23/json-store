@@ -1,17 +1,22 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ShoppingCartContext } from "@/context/ShoppingCartContext"
+import { useMutation } from "@apollo/client"
+import { SaleSave } from "@/graphql/sale"
 
-export const usePayForm = () => {
+export const usePayForm = ({payForm}) => {
   const [pageError, setPageError] = useState([])
-  const { productsSelected } = useContext(ShoppingCartContext)
   const [loadingValidate, setLoadingValidate] = useState(false)
+  const { productsSelected, clearCart } = useContext(ShoppingCartContext)
+
+  const [saveSale, { data, loading, error }] = useMutation(SaleSave)
 
   const initialValues = {
-    id: '',
-    name: '',
+    _id: '',
+    customerName: '',
+    customerId: '',
     phone: '',
     address: '',
-    reciver: '',
+    reciverName: '',
     cardNumber: '',
     purchasedItems: productsSelected.map((item) => {
       return {
@@ -63,11 +68,11 @@ export const usePayForm = () => {
   const validate = (values) => {
     const error = {}
 
-    if (!values.name) {
-      error.name = 'Este campo es requerido'
+    if (!values.customerName) {
+      error.customerName = 'Este campo es requerido'
     }
-    if (!values.id) {
-      error.id = 'Este campo es requerido'
+    if (!values.customerId) {
+      error.customerId = 'Este campo es requerido'
     }
     if (!values.address) {
       error.address = 'Este campo es requerido'
@@ -132,18 +137,33 @@ export const usePayForm = () => {
 
   const onSubmit = async (values) => {
     setLoadingValidate(true)
-    const response = await validateCreditCard(numberAssemble(values.cardNumber))
+    const data = {...values}
+    data.cardNumber = numberAssemble(values.cardNumber)
+    const response = await validateCreditCard(data.cardNumber)
+
     if (response) {
-      console.log('numero valido')
+      await saveSale({variables: { input: data } })
 
     } else {
-      console.log('numero invalido')
+      console.log('numero invalido',data)
+      setLoadingValidate(false)
       
     }
-
-    console.log(values)
-    setLoadingValidate(false)
+    
   }
+
+  useEffect(() => {
+    if (error) {
+      console.log('ha ocurrido un error',error)
+      setLoadingValidate(false)
+
+    } else if (data?.saleSave) {
+      setLoadingValidate(false)
+      clearCart()
+      payForm.onClose()
+    }
+
+  }, [data, error])
 
   return {
     onSubmit,

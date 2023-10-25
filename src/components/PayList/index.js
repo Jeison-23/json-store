@@ -47,7 +47,7 @@ export const PayList = () => {
         size='2xl'
         title='Formulario de Pago'
         body={
-          <PayForm />
+          <PayForm payForm={payForm} />
         }
         isOpen={payForm.isOpen}
         onClose={payForm.onClose}

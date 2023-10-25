@@ -5,8 +5,14 @@ import { usePayForm } from '@/hooks/usePayForm'
 import { ComponetInputFormik } from '@/common/ComponetInputFormik'
 import { Button, Flex, Grid, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
-export const PayForm = () => {
-  const { onSubmit, validate, cardNumber, initialValues, loadingValidate } = usePayForm()
+export const PayForm = (props) => {
+  const {
+    onSubmit,
+    validate,
+    cardNumber,
+    initialValues,
+    loadingValidate
+  } = usePayForm(props)
 
   return (
     <Formik
@@ -27,16 +33,16 @@ export const PayForm = () => {
                 <Grid gap={2} >
                   <ComponetInputFormik
                     required
-                    name='name'
+                    name='customerName'
                     type='text'
                     label='Nombre completo'
                     placeholder='jhon Doe'
-                    onChangeInput={(v)=> setFieldValue('name', v?.toLowerCase()) }
+                    onChangeInput={(v)=> setFieldValue('customerName', v?.toLowerCase()) }
                     inputTextTransform='capitalize'
                   />
                   <ComponetInputFormik
                     required
-                    name='id'
+                    name='customerId'
                     type='text'
                     placeholder='1000100123'
                     label='Numero de documento'
@@ -59,7 +65,7 @@ export const PayForm = () => {
                   />
 
                   <ComponetInputFormik
-                    name='reciver'
+                    name='reciverName'
                     type='text'
                     placeholder='si tu recibes lo puedes dejar vació'
                     label='Nombre de quien recive'

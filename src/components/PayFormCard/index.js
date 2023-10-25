@@ -72,7 +72,7 @@ export const PayFormCard = (props) => {
           <ComponetInputFormik
             w='25%'
             name='cvv'
-            type='number'
+            type='text'
             variant='flushed'
             placeholder='000'
             alignSelf='center'

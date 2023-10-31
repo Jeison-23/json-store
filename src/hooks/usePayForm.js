@@ -149,20 +149,18 @@ export const usePayForm = ({payForm}) => {
       setLoadingValidate(false)
       
     }
-    
   }
 
   useEffect(() => {
     if (error) {
       console.log('ha ocurrido un error',error)
-      setLoadingValidate(false)
 
     } else if (data?.saleSave) {
-      setLoadingValidate(false)
       clearCart()
       payForm.onClose()
     }
 
+    setLoadingValidate(false)
   }, [data, error])
 
   return {

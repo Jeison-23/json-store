@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
+import { SessionContext } from '@/context/SessionContext'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { ComponentDrawer } from '@/common/ComponentDrawer'
 import { ShopingCartProducts } from '@/components/ShopingCartProducts'
 import { AiOutlineAppstoreAdd, AiOutlineShoppingCart } from 'react-icons/ai'
-import { Box, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex, Icon, Image, Text, useDisclosure } from '@chakra-ui/react'
 import { ShopingcartProductsCount } from '@/components/ShopingcartProductsCount'
 import { ShopingCartProductsFooter } from '@/components/ShopingCartProductsFooter'
 
 export const NavbarMainLayout = ({ path, children }) => {
   const shopingCartDrawer = useDisclosure()
   const [token, setToken] = useState('')
+  const { avatar } = useContext(SessionContext)
   const [isLogged, setIsLogged] = useState(false)
   
   useEffect(() => {
@@ -21,7 +23,7 @@ export const NavbarMainLayout = ({ path, children }) => {
     setIsLogged(state)
 
   }, [path])
-  
+
   return (
     <Box>
       <Flex
@@ -77,9 +79,16 @@ export const NavbarMainLayout = ({ path, children }) => {
             : undefined}
 
           {isLogged ?
-            <Text>
+            <Link href='/invoices'>
+            <Text
+              cursor='pointer'
+              as={path === '/invoices' && 'b'}
+              alignSelf='end'
+              textShadow={path === '/invoices' && '0px 0px 8px #CC6BEE, 0px 0px 8px #CC6BEE '}
+            >
               Facturas
             </Text>
+          </Link>
             : undefined}
         </Flex>
 
@@ -111,13 +120,15 @@ export const NavbarMainLayout = ({ path, children }) => {
             </Link>
             :
             <Link href={`/profile/${token}`}>
-              <Icon
+              {!avatar ? <Icon
                 boxSize={5}
                 as={FaUser}
                 borderWidth={1}
                 borderRadius='100%'
                 bg={path === `/profile/${token}` && '#CC6BEE'}
               />
+            : <Image src={avatar} borderRadius={100} h='40px' w='40px' />
+            }
             </Link>
           }
         </Flex>

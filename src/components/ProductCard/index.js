@@ -88,7 +88,7 @@ export const ProductCard = (props) => {
       <Grid color='#000000' bg='#FFFFFF' >
         <Text textTransform='uppercase' as='b' fontSize='2xl' >{name}</Text>
         <Grid>
-          <Text>Precio: {price.toLocaleString('es',{style: 'currency', currency: 'COP'})}</Text>
+          <Text>Precio: {price.toLocaleString('de',{style: 'currency', currency: 'COP'})}</Text>
           <Text>Stock: {stock.toLocaleString('de')}</Text>
           <Text>Categoria: {category?.name}</Text>
         </Grid>

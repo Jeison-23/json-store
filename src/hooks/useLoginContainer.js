@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Login } from "@/graphql/login"
 import { useRouter } from "next/navigation"
 import { useLazyQuery } from "@apollo/client"
 import { messages } from "@/constants/messages"
 import { useGeneralFunction } from "./useGeneralFunction"
+import { SessionContext } from "@/context/SessionContext"
 
 export const useLoginContainer = () => {
   const router = useRouter()
+  const { newToken } = useContext(SessionContext)
   const { validateEmail, alertToast } = useGeneralFunction()
   const [localLoading, setLocalLoading] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
@@ -54,6 +56,7 @@ export const useLoginContainer = () => {
 
       } else if (data?.login) {
         alertToast({ title: 'Correcto', description: 'Hola, bienvenido has ingresado de manera correcta!', status: 'success', position: 'top' })
+        newToken(data.login)
         localStorage.setItem('session-token', JSON.stringify(data.login))
         router.replace(`/profile/${data.login}`)
 

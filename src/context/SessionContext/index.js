@@ -43,9 +43,11 @@ const SessionContextProvider = ({ children }) => {
       value={{
         session,
         loading: loading,
-        //phone: session?.phone,
+        phone: session?.phone,
         id: session?.id || null,
         avatar: session?.image || null,
+        fullName: session?.firstName && `${session.firstName.toLowerCase()} ${session.lastName.toLowerCase()}`,
+        newToken: setToken,
       }}
     >
       {children}

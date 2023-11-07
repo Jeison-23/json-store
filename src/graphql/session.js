@@ -8,6 +8,7 @@ export const Session = gql`
       userId
       lastName
       firstName
+      phone
       image
       typeId
       id

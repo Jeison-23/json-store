@@ -2,19 +2,21 @@ import { useContext, useEffect, useState } from "react"
 import { ShoppingCartContext } from "@/context/ShoppingCartContext"
 import { useMutation } from "@apollo/client"
 import { SaleSave } from "@/graphql/sale"
+import { SessionContext } from "@/context/SessionContext"
 
 export const usePayForm = ({payForm}) => {
   const [pageError, setPageError] = useState([])
   const [loadingValidate, setLoadingValidate] = useState(false)
+  const { id, phone, fullName } = useContext(SessionContext)
   const { productsSelected, clearCart } = useContext(ShoppingCartContext)
 
   const [saveSale, { data, loading, error }] = useMutation(SaleSave)
 
   const initialValues = {
     _id: '',
-    customerName: '',
-    customerId: '',
-    phone: '',
+    customerId: id?.toString() || '',
+    customerName: fullName ?? '',
+    phone: phone || '',
     address: '',
     reciverName: '',
     cardNumber: '',

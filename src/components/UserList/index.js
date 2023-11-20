@@ -32,9 +32,9 @@ export const UserList = (props) => {
       <Grid
         gap={2}
         templateColumns={{
-          xl: 'repeat(3, auto)',
-          lg: 'repeat(2, auto)',
-          sm: 'repeat(1, auto)'
+          xl: 'repeat(3, 1fr)',
+          lg: 'repeat(2, 1fr)',
+          sm: 'repeat(1, 1fr)'
         }}
       >
         {

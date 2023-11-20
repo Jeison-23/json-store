@@ -9,7 +9,7 @@ import {
   Tooltip
 } from '@chakra-ui/react'
 
-export const CardUser = ({ user,  options = [] }) => {
+export const CardUser = ({ user, options = [] }) => {
 
   return (
     <Grid
@@ -19,12 +19,13 @@ export const CardUser = ({ user,  options = [] }) => {
       borderWidth='1px'
       templateColumns={`repeat(${options.length ? 3 : 2}, auto)`}
     >
-      <Box>
+      <Box w='150px' >
         <Grid >
           <Image
+            w='150px'
+            h='130px'
             borderRadius={'md'}
             justifySelf='center'
-            w='200px' h='130px'
             src={user?.image}
           />
         </Grid>
@@ -51,8 +52,8 @@ export const CardUser = ({ user,  options = [] }) => {
 
         <Box>
           <Flex>
-          <Text textTransform='capitalize' fontSize='sm'>{`${user?.typeId}`}: </Text>
-          <Text fontSize='sm'>{` ${user?.id}`}</Text>
+            <Text textTransform='capitalize' fontSize='sm'>{`${user?.typeId}`}: </Text>
+            <Text fontSize='sm'>{` ${user?.id}`}</Text>
           </Flex>
           <Flex gap={1}>
             <Text fontSize='md' as='b'>Telefono:</Text>

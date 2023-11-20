@@ -26,7 +26,7 @@ export const LoginContainer = () => {
       bgRepeat='no-repeat'
       alignContent='center'
       justifyItems='center'
-      bgImage='url(/bgLogin.jpeg)'
+      bgImage='url(/bg_login_2.jpeg)'
     >
       <Grid>
         <Formik

@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { AiOutlineAppstoreAdd } from 'react-icons/ai'
-import { ThemeSwitcher } from '@/components/ThemeSwitcher'
-import { Box, Flex, Grid, Icon, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
-import { useLazyQuery } from '@apollo/client'
-import { Session } from '@/graphql/session'
 import { FaUser } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
+import { Session } from '@/graphql/session'
+import { useLazyQuery } from '@apollo/client'
+import { AiOutlineAppstoreAdd } from 'react-icons/ai'
+import { SessionContext } from '@/context/SessionContext'
+import { ThemeSwitcher } from '@/components/ThemeSwitcher'
+import { Box, Flex, Grid, Icon, Image, Text } from '@chakra-ui/react'
 
 export const NavbarAdminLayout = ({ children, path }) => {
   const router = useRouter()
-  const [accessKeys, setAccessKeys] = useState([])
+  const { avatar } = useContext(SessionContext)
   const [token, setToken] = useState('')
+  const [accessKeys, setAccessKeys] = useState([])
   const [getSession, { data, loading, error }] = useLazyQuery(Session)
 
   const getAccess = (tok) => {
@@ -25,13 +27,10 @@ export const NavbarAdminLayout = ({ children, path }) => {
     const localToken = localStorage.getItem('session-token')
     if (JSON.parse(localToken)) {
       setToken(JSON.parse(localToken))
-      !accessKeys.length && getAccess(JSON.parse(localToken))
+      !accessKeys?.length && getAccess(JSON.parse(localToken))
 
-    } else {
-      router.replace('/login')
-
-    }
-
+    } else router.replace('/login')
+    
   }, [path])
 
   useEffect(() => {
@@ -135,13 +134,16 @@ export const NavbarAdminLayout = ({ children, path }) => {
         >
           <ThemeSwitcher />
           <Link href={`/admin/profile/${token}`}>
-            <Icon
-              boxSize={6}
-              as={FaUser}
-              borderWidth={1}
-              borderRadius='100%'
-              bg={path === `/admin/profile/${token}` && '#CC6BEE'}
-            />
+            {!avatar ?
+              <Icon
+                boxSize={6}
+                as={FaUser}
+                borderWidth={1}
+                borderRadius='100%'
+                bg={path === `/admin/profile/${token}` && '#CC6BEE'}
+              />
+              : <Image src={avatar} borderRadius={100} h='30px' w='30px' />
+            }
           </Link>
         </Flex>
       </Grid>

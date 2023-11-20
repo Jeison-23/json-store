@@ -15,7 +15,7 @@ export const NavbarMainLayout = ({ path, children }) => {
   const [token, setToken] = useState('')
   const { avatar } = useContext(SessionContext)
   const [isLogged, setIsLogged] = useState(false)
-  
+
   useEffect(() => {
     const localToken = localStorage.getItem('session-token')
     const state = JSON.parse(localToken) ? true : false
@@ -71,7 +71,7 @@ export const NavbarMainLayout = ({ path, children }) => {
               Productos
             </Text>
           </Link>
-          
+
           {isLogged ?
             <Text>
               Favoritos
@@ -80,15 +80,15 @@ export const NavbarMainLayout = ({ path, children }) => {
 
           {isLogged ?
             <Link href='/invoices'>
-            <Text
-              cursor='pointer'
-              as={path === '/invoices' && 'b'}
-              alignSelf='end'
-              textShadow={path === '/invoices' && '0px 0px 8px #CC6BEE, 0px 0px 8px #CC6BEE '}
-            >
-              Facturas
-            </Text>
-          </Link>
+              <Text
+                cursor='pointer'
+                as={path === '/invoices' && 'b'}
+                alignSelf='end'
+                textShadow={path === '/invoices' && '0px 0px 8px #CC6BEE, 0px 0px 8px #CC6BEE '}
+              >
+                Facturas
+              </Text>
+            </Link>
             : undefined}
         </Flex>
 
@@ -120,15 +120,16 @@ export const NavbarMainLayout = ({ path, children }) => {
             </Link>
             :
             <Link href={`/profile/${token}`}>
-              {!avatar ? <Icon
-                boxSize={5}
-                as={FaUser}
-                borderWidth={1}
-                borderRadius='100%'
-                bg={path === `/profile/${token}` && '#CC6BEE'}
-              />
-            : <Image src={avatar} borderRadius={100} h='40px' w='40px' />
-            }
+              {!avatar ?
+                <Icon
+                  boxSize={5}
+                  as={FaUser}
+                  borderWidth={1}
+                  borderRadius='100%'
+                  bg={path === `/profile/${token}` && '#CC6BEE'}
+                />
+                : <Image src={avatar} borderRadius={100} h='30px' w='30px' />
+              }
             </Link>
           }
         </Flex>
@@ -146,7 +147,7 @@ export const NavbarMainLayout = ({ path, children }) => {
           isOpen={shopingCartDrawer.isOpen}
           onClose={shopingCartDrawer.onClose}
           body={<ShopingCartProducts shopingCartDrawer={shopingCartDrawer} />}
-          footer={ <ShopingCartProductsFooter shopingCartDrawer={shopingCartDrawer} /> }
+          footer={<ShopingCartProductsFooter shopingCartDrawer={shopingCartDrawer} />}
         />
       </Box>
     </Box>
